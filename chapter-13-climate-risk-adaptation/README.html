@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 13: Climate Risk Assessment and Adaptation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body><h1>Chapter 13: Climate Risk Assessment and Adaptation</h1><p>This folder contains code examples, notebooks, and datasets accompanying Chapter 13 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p><h2>Chapter Overview</h2><p>This chapter establishes comprehensive frameworks for AI-enhanced climate risk analysis, including:</p><ul>
+<li>Mathematical foundations for climate risk modeling</li>
+<li>Flood risk assessment with machine learning</li>
+<li>Reinforcement learning for adaptive flood management</li>
+<li>Critical infrastructure resilience assessment</li>
+<li>Financial risk assessment for climate change</li>
+<li>Supply chain resilience and risk mitigation</li>
+<li>Adaptation pathway analysis and scenario planning</li>
+<li>Climate and health risk mapping</li>
+<li>Urban climate adaptation and resilience</li>
+<li>Validation frameworks and uncertainty quantification</li>
+</ul><h2>Contents</h2><pre><code>chapter-13-climate-risk-adaptation/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_climate_risk_fundamentals.ipynb
+│   ├── 02_flood_susceptibility_mapping.ipynb
+│   ├── 03_rl_adaptive_management.ipynb
+│   ├── 04_infrastructure_resilience.ipynb
+│   ├── 05_financial_climate_risk.ipynb
+│   ├── 06_supply_chain_resilience.ipynb
+│   ├── 07_adaptation_pathways.ipynb
+│   └── 08_urban_adaptation.ipynb
+├── scripts/
+│   ├── climate_risk_framework.py
+│   ├── flood_risk_predictor.py
+│   ├── rl_adaptation_optimizer.py
+│   └── resilience_assessor.py
+└── data/
+    ├── flood_historical_events.csv
+    ├── infrastructure_network.graphml
+    └── README.md
+</code></pre><h2>Key Concepts and Mathematical Foundations</h2><h3>1. Fundamental Climate Risk Equation</h3><p><strong>Integrated Risk Framework:</strong></p>
+<pre><code>Risk = f(Hazard, Exposure, Vulnerability) = ∫_Ω H(x,t)·E(x)·V(x,s) dxWhere:
+
+H: hazard intensity at location x, time t
+E: exposure (people, assets, ecosystems)
+V: vulnerability (socioeconomic characteristics s)
+Ω: spatial domain</code></pre>
+<h3>2. Machine Learning Risk Assessment</h3><p><strong>Neural Network Decomposition:</strong></p>
+<pre><code>Risk_ML(x,t) = f_neural(H_climate(x,t), E_population(x), E_infrastructure(x), 
+                        V_socioeconomic(x), V_adaptive(x))Components:
+
+Climate hazard inputs
+Population and infrastructure exposure
+Baseline socioeconomic vulnerability
+Adaptive capacity</code></pre>
+<h3>3. Flood Risk Formulation</h3><p><strong>Probabilistic Damage Integration:</strong></p>
+<pre><code>R_flood(x) = ∫₀^∞ P(h > h₀)·D(h,x)·A_exposed(x) dhWhere:
+
+P(h > h₀): probability of depth h exceeding threshold
+D(h,x): depth-damage function
+A_exposed: exposed assets</code></pre>
+<h3>4. Temporal Risk Dynamics</h3><p><strong>Risk Evolution Components:</strong></p>
+<pre><code>dRisk/dt = (∂H/∂t)|_climate · E · V + H · (∂E/∂t)|_development + H · E · (∂V/∂t)|_adaptationThree drivers:
+
+Hazard trends from climate change
+Exposure trends from development
+Vulnerability changes from adaptation</code></pre>
+<h3>5. Flood Susceptibility Mapping</h3><p><strong>Multi-Factor Ensemble:</strong></p>
+<pre><code>S_flood(x) = f_ensemble(T_topography(x), H_hydrology(x), M_meteorology(x), 
+                        L_landuse(x), S_soil(x))Conditioning factors:
+
+Topographic indices (slope, elevation, TWI)
+Hydrological characteristics (drainage, distance to river)
+Meteorological patterns (precipitation, intensity)
+Land use and soil properties</code></pre>
+<h3>6. Hybrid Flood Modeling</h3><p><strong>Physics + ML Integration:</strong></p>
+<pre><code>h_hybrid(x,t) = h_physical(x,t; p) + Δh_ML(x,t; X_local)Combines:
+
+Physics-based hydraulic model (parameters p)
+ML corrections for local features</code></pre>
+<h3>7. Reinforcement Learning Adaptation</h3><p><strong>Optimal Policy Under Uncertainty:</strong></p>
+<pre><code>π*(s_t) = argmax_π E[Σₜ γᵗ R(s_t, a_t, s_{t+1}) | π]Where:
+
+s_t: system state (flood risk conditions)
+a_t: adaptation actions
+R: reward (protection benefits - costs)
+γ: discount factor</code></pre>
+<h3>8. Coastal Adaptation RL</h3><p><strong>Multi-Strategy Optimization:</strong></p>
+<pre><code>a*_coastal(t) = π_RL(h_SLR(t), P_storm(t), E_exposure(t), B_budget(t), I_existing(t))Actions optimize:
+
+Gray infrastructure (seawalls, levees)
+Green infrastructure (wetlands, dunes)
+Policy measures (building codes, retreat)</code></pre>
+<h3>9. Multi-Objective Adaptation</h3><p><strong>Composite Reward Function:</strong></p>
+<pre><code>R_multi(s,a) = w^T · [R_flood_protection, -C_infrastructure, R_ecosystem, 
+                      -E_carbon, R_equity]^TBalances:
+
+Flood protection benefits
+Infrastructure costs
+Ecosystem services
+Carbon footprint
+Equity considerations</code></pre>
+<h3>10. Infrastructure Resilience</h3><p><strong>Robustness + Recovery:</strong></p>
+<pre><code>R_infrastructure = ∫₀^t_recovery Q(t)/Q₀ dt + λ_redundancy·D_redundancy 
+                   - λ_cascade·P_cascadeMetrics:
+
+Q(t): functionality over time
+D_redundancy: system redundancy
+P_cascade: cascade failure probability</code></pre>
+<h3>11. Graph Networks for Infrastructure</h3><p><strong>Network Topology Modeling:</strong></p>
+<pre><code>F_i^(l+1) = σ(W^(l)·F_i^(l) + Σ_{j∈N(i)} W_edge^(l)·E_ij·F_j^(l))Components:
+
+Node features F_i
+Edge attributes E_ij (connection strength)
+Neighbor aggregation</code></pre>
+<h3>12. Financial Climate Risk</h3><p><strong>Physical + Transition Risk:</strong></p>
+<pre><code>FinRisk_climate = PhysicalRisk(H_hazards, A_assets) + TransitionRisk(P_policy, T_technology)Credit Risk Integration:
+P_default(i,t) = f_ML(F_financial(i,t), R_climate(i,t), S_sector(i), G_geography(i))</code></pre><h3>13. Supply Chain Resilience</h3><p><strong>Climate-Aware Design:</strong></p>
+<pre><code>min_x [C_operation(x) + E_climate[C_disruption(x, D_climate)]]Optimizes:
+
+Operational costs
+Expected disruption costs under climate scenarios</code></pre>
+<h3>14. Adaptation Pathway Scoring</h3><p><strong>Multi-Criteria Analysis:</strong></p>
+<pre><code>Score_adaptation(a) = Σⱼ wⱼ·Cⱼ(a)Criteria:
+
+Effectiveness
+Cost
+Co-benefits
+Equity
+Flexibility</code></pre>
+<h2>Running the Examples</h2><h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray rasterio gdal networkx scikit-learn tensorflow torch matplotlib seaborn gym stable-baselines3</code></pre><h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-13-climate-risk-adaptation/notebooks
+jupyter lab</code></pre><h3>Python Scripts</h3>
+<pre><code>cd chapter-13-climate-risk-adaptation/scripts
+python climate_risk_framework.py</code></pre><h2>Notebook Descriptions</h2><h3>01_climate_risk_fundamentals.ipynb</h3>
+<ul>
+<li>Risk equation decomposition</li>
+<li>Hazard-exposure-vulnerability framework</li>
+<li>Temporal risk dynamics</li>
+<li>Uncertainty propagation</li>
+</ul><h3>02_flood_susceptibility_mapping.ipynb</h3>
+<ul>
+<li>Random forest for flood mapping</li>
+<li>Topographic feature engineering</li>
+<li>Ensemble methods</li>
+<li>Hybrid physics-ML models</li>
+</ul><h3>03_rl_adaptive_management.ipynb</h3>
+<ul>
+<li>Q-learning for coastal protection</li>
+<li>Multi-objective optimization</li>
+<li>Adaptive policy design</li>
+<li>Sequential decision-making</li>
+</ul><h3>04_infrastructure_resilience.ipynb</h3>
+<ul>
+<li>Graph neural networks</li>
+<li>Cascade failure analysis</li>
+<li>Resilience metrics</li>
+<li>Recovery modeling</li>
+</ul><h3>05_financial_climate_risk.ipynb</h3>
+<ul>
+<li>Credit risk with climate factors</li>
+<li>Portfolio stress testing</li>
+<li>Physical vs transition risk</li>
+<li>Scenario analysis</li>
+</ul><h3>06_supply_chain_resilience.ipynb</h3>
+<ul>
+<li>Disruption prediction</li>
+<li>Network optimization</li>
+<li>Adaptive routing</li>
+<li>Resilience strategies</li>
+</ul><h3>07_adaptation_pathways.ipynb</h3>
+<ul>
+<li>Multi-criteria decision analysis</li>
+<li>Scenario planning</li>
+<li>Robust decision-making</li>
+<li>Pathway optimization</li>
+</ul><h3>08_urban_adaptation.ipynb</h3>
+<ul>
+<li>High-resolution urban flood risk</li>
+<li>Green infrastructure optimization</li>
+<li>Heat island mitigation</li>
+<li>Multi-hazard assessment</li>
+</ul><h2>Applications</h2><h3>Disaster Risk Reduction</h3>
+<ul>
+<li>Flood forecasting and mapping</li>
+<li>Early warning systems</li>
+<li>Emergency planning</li>
+<li>Evacuation optimization</li>
+</ul><h3>Infrastructure Planning</h3>
+<ul>
+<li>Resilience assessment</li>
+<li>Adaptation prioritization</li>
+<li>Network optimization</li>
+<li>Investment planning</li>
+</ul><h3>Financial Services</h3>
+<ul>
+<li>Insurance pricing</li>
+<li>Credit risk assessment</li>
+<li>Portfolio management</li>
+<li>Climate disclosure</li>
+</ul><h3>Urban Planning</h3>
+<ul>
+<li>Land use planning</li>
+<li>Green infrastructure</li>
+<li>Climate-resilient design</li>
+<li>Zoning regulations</li>
+</ul><h2>Performance Metrics</h2><table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>AUC-ROC</td>
+<td>Area under ROC curve</td>
+<td>Flood susceptibility</td>
+</tr>
+<tr>
+<td>F1 Score</td>
+<td>2·(Prec·Rec)/(Prec+Rec)</td>
+<td>Binary classification</td>
+</tr>
+<tr>
+<td>Resilience</td>
+<td>∫(Q(t)/Q₀)dt</td>
+<td>Infrastructure</td>
+</tr>
+<tr>
+<td>Expected Loss</td>
+<td>Σ P(h)·D(h)</td>
+<td>Financial risk</td>
+</tr>
+</table><h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul><h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p><h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p><h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul><hr><p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p></body>
+</html>
