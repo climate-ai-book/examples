@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Machine Learning Fundamentals for Climate Applications</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h4 {
+            font-size: 1em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 3: Machine Learning Fundamentals for Climate Applications</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 3 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter establishes rigorous mathematical frameworks for applying machine learning to climate science, including:</p>
+<ul>
+<li>Information-theoretic foundations for climate data analysis</li>
+<li>Stochastic modeling of climate variability</li>
+<li>Supervised learning algorithms for climate prediction</li>
+<li>Deep learning architectures for spatiotemporal data</li>
+<li>Physics-informed machine learning</li>
+<li>Unsupervised learning for pattern discovery</li>
+<li>Spectral methods and multi-scale analysis</li>
+<li>Bayesian methods and uncertainty quantification</li>
+<li>Model interpretability and explainability</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-03-ml-fundamentals/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_information_theory_ml.ipynb
+│   ├── 02_supervised_learning_climate.ipynb
+│   ├── 03_deep_learning_architectures.ipynb
+│   ├── 04_physics_informed_networks.ipynb
+│   ├── 05_unsupervised_pattern_discovery.ipynb
+│   ├── 06_bayesian_uncertainty.ipynb
+│   └── 07_model_interpretability.ipynb
+├── scripts/
+│   ├── climate_ml_framework.py
+│   ├── pinn_implementation.py
+│   ├── lstm_climate_model.py
+│   └── interpretability_tools.py
+└── data/
+    ├── sample_climate_timeseries.nc
+    ├── spatial_climate_fields.nc
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Information Theory for Climate ML</h3>
+<p><strong>Differential Entropy:</strong></p>
+<pre><code>H(X) = -∫ p(x)log p(x) dx</code></pre>
+<p><strong>Mutual Information:</strong></p>
+<pre><code>I(X;Y) = ∫∫ p(x,y)log(p(x,y)/(p(x)p(y))) dx dy</code></pre>
+<p><strong>KL Divergence:</strong></p>
+<pre><code>D_KL(P||Q) = ∫ p(x)log(p(x)/q(x)) dx</code></pre>
+<h3>2. Stochastic Climate Modeling</h3>
+<p><strong>Stochastic Differential Equation:</strong></p>
+<pre><code>dX_t = f(X_t,t,θ)dt + g(X_t,t,θ)dW_t</code></pre>
+<p><strong>Fokker-Planck Equation:</strong></p>
+<pre><code>∂p/∂t = -Σ_i ∂/∂x_i[f_i(x,t)p] + (1/2)Σ_ij ∂²/∂x_i∂x_j[G_ij(x,t)p]</code></pre>
+<p><strong>VAR Model:</strong></p>
+<pre><code>X_t = c + Σ_{i=1}^p A_i X_{t-i} + ε_t</code></pre>
+<p><strong>State-Space Model:</strong></p>
+<pre><code>x_t = F_t x_{t-1} + G_t u_t + w_t  (state equation)
+y_t = H_t x_t + v_t                 (observation equation)</code></pre>
+<h3>3. Supervised Learning</h3>
+<p><strong>General Framework:</strong></p>
+<pre><code>f̂ = argmin_{f∈F} (1/n)Σ_i L(y_i, f(x_i)) + λR(f)</code></pre>
+<p><strong>Kernel SVR:</strong></p>
+<pre><code>f*(x) = Σ_i α_i k(x_i, x)</code></pre>
+<p><strong>Random Forest:</strong></p>
+<pre><code>f_RF(x) = (1/B)Σ_{b=1}^B T_b(x)</code></pre>
+<p><strong>Gradient Boosting:</strong></p>
+<pre><code>F_m(x) = F_{m-1}(x) + γ_m h_m(x)</code></pre>
+<h3>4. Deep Learning Architectures</h3>
+<p><strong>Universal Approximation:</strong></p>
+<pre><code>f(x) = Σ_{i=1}^N w_i σ(v_i^T x + b_i) + w_0</code></pre>
+<p><strong>Convolution (Circular for Global Data):</strong></p>
+<pre><code>(X *_circ W)_{i,j} = Σ_{m,n} X_{(i+m) mod H,(j+n) mod W} W_{m,n}</code></pre>
+<p><strong>LSTM Gates:</strong></p>
+<pre><code>f_t = σ(W_f · [h_{t-1}, x_t] + b_f)      # Forget gate
+i_t = σ(W_i · [h_{t-1}, x_t] + b_i)      # Input gate
+C̃_t = tanh(W_C · [h_{t-1}, x_t] + b_C)  # Candidate
+C_t = f_t * C_{t-1} + i_t * C̃_t         # Cell state
+o_t = σ(W_o · [h_{t-1}, x_t] + b_o)      # Output gate
+h_t = o_t * tanh(C_t)                     # Hidden state</code></pre>
+<h3>5. Physics-Informed Neural Networks (PINNs)</h3>
+<p><strong>PINN Loss Function:</strong></p>
+<pre><code>L = L_data + λ_pde L_pde + λ_bc L_bc</code></pre>
+<p><strong>Conservation Constraints:</strong></p>
+<pre><code>L_momentum = Σ_i |∂v/∂t + (v·∇)v + fk×v + (1/ρ)∇p|²
+L_continuity = Σ_i |∂ρ/∂t + ∇·(ρv)|²
+L_thermodynamic = Σ_i |∂T/∂t + v·∇T - Q/c_p|²</code></pre>
+<h3>6. Unsupervised Learning</h3>
+<p><strong>PCA:</strong></p>
+<pre><code>Cv_i = λ_i v_i
+EVR_i = λ_i / Σ_j λ_j</code></pre>
+<p><strong>ICA (FastICA):</strong></p>
+<pre><code>x = As
+w_new = E[xg(w^T x)] - E[g'(w^T x)]w</code></pre>
+<p><strong>K-means:</strong></p>
+<pre><code>J = Σ_{i=1}^k Σ_{x∈C_i} ||x - μ_i||²</code></pre>
+<p><strong>Gaussian Mixture Model:</strong></p>
+<pre><code>p(x) = Σ_{k=1}^K π_k N(x|μ_k, Σ_k)</code></pre>
+<h3>7. Spectral Analysis</h3>
+<p><strong>Discrete Fourier Transform:</strong></p>
+<pre><code>X_k = Σ_{n=0}^{N-1} x_n e^{-2πikn/N}</code></pre>
+<p><strong>Continuous Wavelet Transform:</strong></p>
+<pre><code>W(a,b) = (1/√a) ∫ x(t)ψ*((t-b)/a) dt</code></pre>
+<p><strong>Empirical Mode Decomposition:</strong></p>
+<pre><code>x(t) = Σ_{i=1}^n c_i(t) + r_n(t)</code></pre>
+<h3>8. Bayesian Methods</h3>
+<p><strong>Bayesian Linear Regression:</strong></p>
+<pre><code>p(β|y,X,σ²) = N(μ_n, Σ_n)
+p(y*|x*,y,X) = N(x*^T μ_n, σ² + x*^T Σ_n x*)</code></pre>
+<p><strong>Gaussian Process:</strong></p>
+<pre><code>f(x) ~ GP(m(x), k(x,x'))
+f̄* = k^T(K + σ_n²I)^{-1} y
+var[f*] = k* - k^T(K + σ_n²I)^{-1} k</code></pre>
+<p><strong>Monte Carlo Dropout:</strong></p>
+<pre><code>p(y*|x*,D) ≈ (1/T)Σ_{t=1}^T f(x*; w_t)</code></pre>
+<h3>9. Optimization</h3>
+<p><strong>Adam Optimizer:</strong></p>
+<pre><code>m_t = β₁m_{t-1} + (1-β₁)∇L
+v_t = β₂v_{t-1} + (1-β₂)(∇L)²
+θ_{t+1} = θ_t - η/(√v̂_t + ε) m̂_t</code></pre>
+<p><strong>Learning Rate Schedules:</strong></p>
+<pre><code>Cosine: η_t = η_min + (1/2)(η_max - η_min)(1 + cos(T_cur/T_max π))
+Exponential: η_t = η_0 e^{-λt}</code></pre>
+<h3>10. Interpretability</h3>
+<p><strong>SHAP Values:</strong></p>
+<pre><code>φ_i = Σ_{S⊆N\{i}} (|S|!(n-|S|-1)!/n!)[f_x(S∪{i}) - f_x(S)]</code></pre>
+<p><strong>Integrated Gradients:</strong></p>
+<pre><code>IG_i(x) = (x_i - x'_i)∫_{α=0}^1 ∂f(x'+α(x-x'))/∂x_i dα</code></pre>
+<p><strong>Partial Dependence:</strong></p>
+<pre><code>PD_{x_j}(z) = E_{x_{-j}}[f(z, x_{-j})]</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 scikit-learn tensorflow torch matplotlib seaborn pywavelets shap</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-03-ml-fundamentals/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-03-ml-fundamentals/scripts
+python climate_ml_framework.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_information_theory_ml.ipynb</h3>
+<ul>
+<li>Calculate entropy and mutual information</li>
+<li>Feature selection using information-theoretic measures</li>
+<li>Teleconnection detection via mutual information</li>
+<li>KL divergence for distribution comparison</li>
+</ul>
+<h3>02_supervised_learning_climate.ipynb</h3>
+<ul>
+<li>Linear regression with physics constraints</li>
+<li>Kernel SVR for temperature prediction</li>
+<li>Random Forests for precipitation modeling</li>
+<li>Gradient boosting for extreme events</li>
+</ul>
+<h3>03_deep_learning_architectures.ipynb</h3>
+<ul>
+<li>Feedforward networks with universal approximation</li>
+<li>CNNs for spatial climate patterns</li>
+<li>LSTMs for temporal climate sequences</li>
+<li>Hybrid spatiotemporal architectures</li>
+</ul>
+<h3>04_physics_informed_networks.ipynb</h3>
+<ul>
+<li>PINNs with conservation law constraints</li>
+<li>Atmospheric dynamics equations</li>
+<li>Thermodynamic consistency enforcement</li>
+<li>Validation against physical bounds</li>
+</ul>
+<h3>05_unsupervised_pattern_discovery.ipynb</h3>
+<ul>
+<li>PCA for EOF analysis</li>
+<li>ICA for signal separation</li>
+<li>K-means for weather regime classification</li>
+<li>GMM for probabilistic clustering</li>
+</ul>
+<h3>06_bayesian_uncertainty.ipynb</h3>
+<ul>
+<li>Bayesian linear regression</li>
+<li>Gaussian Process regression</li>
+<li>Bayesian neural networks</li>
+<li>Uncertainty propagation</li>
+</ul>
+<h3>07_model_interpretability.ipynb</h3>
+<ul>
+<li>SHAP values for feature importance</li>
+<li>Integrated gradients analysis</li>
+<li>Partial dependence plots</li>
+<li>LIME for local explanations</li>
+</ul>
+<h2>Performance Metrics</h2>
+<h3>Climate-Specific Metrics</h3>
+<ul>
+<li><strong>Climate Skill Score:</strong> CSS = 1 - MSE_model/MSE_climatology</li>
+<li><strong>Anomaly Correlation:</strong> Skill in predicting departures from climatology</li>
+<li><strong>Brier Score:</strong> For probabilistic forecasts</li>
+<li><strong>Extremal Dependence:</strong> For extreme event prediction</li>
+</ul>
+<h3>Standard ML Metrics</h3>
+<ul>
+<li>RMSE, MAE, R²</li>
+<li>Precision, Recall, F1 (for classification)</li>
+<li>Log-likelihood</li>
+<li>AIC, BIC (for model selection)</li>
+</ul>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
