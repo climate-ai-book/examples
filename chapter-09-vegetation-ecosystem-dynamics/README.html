@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Vegetation and Ecosystem Dynamics</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 9: Vegetation and Ecosystem Dynamics</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 9 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter establishes theoretical and computational frameworks for AI-enhanced vegetation modeling, including:</p>
+<ul>
+<li>Mathematical foundations for vegetation dynamics modeling</li>
+<li>Deep learning for vegetation index forecasting</li>
+<li>Open ecosystem forecasting with environmental integration</li>
+<li>Machine learning for ecosystem service assessment</li>
+<li>Fire risk prediction and vegetation flammability</li>
+<li>Hyperspectral imaging and vegetation biochemistry</li>
+<li>Climate sensitivity and vegetation response modeling</li>
+<li>Soil organic carbon dynamics and prediction</li>
+<li>Wetland vegetation dynamics and adaptive monitoring</li>
+<li>Global vegetation modeling and biodiversity prediction</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-09-vegetation-ecosystem-dynamics/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_vegetation_carbon_balance.ipynb
+│   ├── 02_ndvi_forecasting_lstm.ipynb
+│   ├── 03_open_ecosystem_convlstm.ipynb
+│   ├── 04_ecosystem_service_valuation.ipynb
+│   ├── 05_fire_risk_prediction.ipynb
+│   ├── 06_hyperspectral_biochemistry.ipynb
+│   ├── 07_soil_carbon_modeling.ipynb
+│   └── 08_wetland_monitoring.ipynb
+├── scripts/
+│   ├── vegetation_dynamics_framework.py
+│   ├── ndvi_predictor.py
+│   ├── fire_risk_model.py
+│   └── soil_carbon_estimator.py
+└── data/
+    ├── ndvi_time_series.csv
+    ├── climate_variables.csv
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Carbon Balance Equation</h3>
+<p><strong>Vegetation Carbon Dynamics:</strong></p>
+<pre><code>dC_veg/dt = GPP(I,T,W,N) - R_auto(T,C_veg) - M_herbivory - L_fire
+Where:
+
+C_veg: vegetation carbon stock
+GPP: gross primary productivity
+I: light, T: temperature, W: water, N: nutrients
+R_auto: autotrophic respiration
+M_herbivory: herbivory loss
+L_fire: fire-induced loss</code></pre>
+
+<h3>2. NDVI Dynamics (Neural Differential Equation)</h3>
+<p><strong>Vegetation Index Evolution:</strong></p>
+<pre><code>dNDVI/dt = f_neural(NDVI(t), T_air(t), P_precip(t), R_solar(t), θ_soil(t))</code></pre>
+<h3>3. Spatiotemporal Vegetation Modeling</h3>
+<p><strong>CNN-LSTM Integration:</strong></p>
+<pre><code>V(x,y,t) = CNN_spatial(E(x,y,t)) ⊙ LSTM_temporal(V_history(x,y)) + ε(x,y,t)
+Components:
+
+CNN captures spatial patterns
+LSTM models temporal dynamics
+⊙ element-wise multiplication</code></pre>
+
+<h3>4. Ecosystem Service Value</h3>
+<p><strong>ESV Quantification:</strong></p>
+<pre><code>ESV(t) = Σ_i A_i(t) · V_i,unit · f_adjust(S_local, E_context)
+Where:
+
+A_i(t): area of land cover class i
+V_i,unit: unit value coefficient
+f_adjust: neural network adjustments</code></pre>
+
+<h3>5. LSTM for Vegetation Forecasting</h3>
+<p><strong>LSTM Gates:</strong></p>
+<pre><code>f_t = σ(W_f · [h_{t-1}, x_t] + b_f)  # Forget gate
+i_t = σ(W_i · [h_{t-1}, x_t] + b_i)  # Input gate
+C̃_t = tanh(W_C · [h_{t-1}, x_t] + b_C)  # Candidate cell state
+C_t = f_t ⊙ C_{t-1} + i_t ⊙ C̃_t  # Cell state update
+NDVI_t = W_out · C_t + b_out  # Output</code></pre>
+<h3>6. Multi-variate NDVI Prediction</h3>
+<p><strong>Environmental Drivers:</strong></p>
+<pre><code>NDVI_pred(t+Δt) = f_DL({NDVI(t-kτ)}_k, {T,P,R,θ}(t), L_spatial)
+Inputs:
+
+Historical NDVI values
+Temperature (T), Precipitation (P)
+Solar radiation (R), Soil moisture (θ)
+Spatial location features</code></pre>
+
+<h3>7. Open Ecosystem Dynamics</h3>
+<p><strong>Threshold Behaviors:</strong></p>
+<pre><code>V_open(t+1) = V(t) + g_neural(V(t), W_available(t), T_opt(t), N_soil(t), D_disturbance(t))</code></pre>
+<p><strong>ConvLSTM Architecture:</strong></p>
+<pre><code>H_spatial = Conv2D(V_landscape) → ConvLSTM(H_spatial, E_climate)</code></pre>
+<h3>8. Fire Risk Prediction</h3>
+<p><strong>Multi-factor Fire Model:</strong></p>
+<pre><code>P_fire(x,y,t) = f_ensemble(NDVI(x,y,t), LST(x,y,t), W_wind(t), H_rel(t), V_fuel(x,y), T_topo(x,y))
+Fuel Moisture Content:
+FMC(t) = g_neural({NDVI(t-kΔt)}_k, {NDWI(t-kΔt)}_k, M_climate)</code></pre>
+<h3>9. Hyperspectral Biochemistry</h3>
+<p><strong>1D CNN for Spectral Analysis:</strong></p>
+<pre><code>B_biochem = f_CNN(R(λ₁,λ₂,...,λₙ)) + g_physics({R(λᵢ)}_critical)
+Solar-Induced Fluorescence:
+SIF(x,y) = h_neural(R_red(x,y), R_NIR(x,y), VI_enhanced(x,y), E_env(x,y))</code></pre>
+<h3>10. Climate Sensitivity</h3>
+<p><strong>Vegetation Response:</strong></p>
+<pre><code>∂V/∂C_i = f_sensitivity(V_baseline, C_i, {C_{-i}}, Z_climate, S_soil)
+Threshold Detection:
+P(regime shift | C > C_threshold) = σ(β₀ + β₁C + Σ_k β_k φ_k(C))</code></pre>
+<h3>11. Soil Organic Carbon</h3>
+<p><strong>SOC Prediction:</strong></p>
+<pre><code>SOC(x,y,z) = f_ML(C_input(x,y), k_decomp(T,θ), T_texture(x,y), L_landuse(x,y), t)
+CNN-MLP Hybrid:
+SOC_map = CNN_spatial(R_DEM, R_NDVI) ⊕ MLP(E_climate, S_soil)</code></pre>
+<h3>12. Wetland Dynamics</h3>
+<p><strong>Adaptive Modeling:</strong></p>
+<pre><code>V_wetland(t) = g_adaptive(V(t-1), W_depth(t), W_duration(t), N_nutrients(t), S_salinity(t))
+Adaptive Stacking:
+P_wetland^stack = Σ_i α_i(t) · M_i(X_satellite, X_aux)</code></pre>
+<h3>13. Physics-Informed Loss</h3>
+<p><strong>Ecological Constraints:</strong></p>
+<pre><code>L_total = L_data(y,ŷ) + λ_physics L_physics(ŷ,E) + λ_eco L_ecology(ŷ)</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray tensorflow torch scikit-learn matplotlib rasterio geopandas spectral</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-09-vegetation-ecosystem-dynamics/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-09-vegetation-ecosystem-dynamics/scripts
+python vegetation_dynamics_framework.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_vegetation_carbon_balance.ipynb</h3>
+<ul>
+<li>Carbon balance equation implementation</li>
+<li>GPP and respiration modeling</li>
+<li>Herbivory and fire effects</li>
+<li>Ecosystem carbon stocks</li>
+</ul>
+<h3>02_ndvi_forecasting_lstm.ipynb</h3>
+<ul>
+<li>LSTM architecture for NDVI prediction</li>
+<li>Time series preparation</li>
+<li>Multi-variate environmental drivers</li>
+<li>Attention mechanisms</li>
+</ul>
+<h3>03_open_ecosystem_convlstm.ipynb</h3>
+<ul>
+<li>ConvLSTM for spatiotemporal modeling</li>
+<li>Grassland and savanna dynamics</li>
+<li>Drought response modeling</li>
+<li>Landscape heterogeneity</li>
+</ul>
+<h3>04_ecosystem_service_valuation.ipynb</h3>
+<ul>
+<li>Land cover change prediction</li>
+<li>Service value quantification</li>
+<li>Spatial mapping of ESV</li>
+<li>Scenario analysis</li>
+</ul>
+<h3>05_fire_risk_prediction.ipynb</h3>
+<ul>
+<li>Random forest fire risk models</li>
+<li>Fuel moisture estimation</li>
+<li>Temporal risk dynamics</li>
+<li>Spatial risk mapping</li>
+</ul>
+<h3>06_hyperspectral_biochemistry.ipynb</h3>
+<ul>
+<li>1D CNN for spectral analysis</li>
+<li>Chlorophyll content retrieval</li>
+<li>Water content estimation</li>
+<li>Crop health monitoring</li>
+</ul>
+<h3>07_soil_carbon_modeling.ipynb</h3>
+<ul>
+<li>Random forest SOC prediction</li>
+<li>Spatial feature extraction</li>
+<li>Climate and soil covariates</li>
+<li>Uncertainty quantification</li>
+</ul>
+<h3>08_wetland_monitoring.ipynb</h3>
+<ul>
+<li>Adaptive stacking methods</li>
+<li>Hydrological response modeling</li>
+<li>Change detection algorithms</li>
+<li>Ecosystem health assessment</li>
+</ul>
+<h2>Applications</h2>
+<h3>Agriculture</h3>
+<ul>
+<li>Crop yield prediction</li>
+<li>Precision agriculture</li>
+<li>Irrigation optimization</li>
+<li>Disease detection</li>
+</ul>
+<h3>Forestry</h3>
+<ul>
+<li>Forest health monitoring</li>
+<li>Timber volume estimation</li>
+<li>Deforestation tracking</li>
+<li>Carbon stock assessment</li>
+</ul>
+<h3>Conservation</h3>
+<ul>
+<li>Biodiversity monitoring</li>
+<li>Habitat mapping</li>
+<li>Protected area management</li>
+<li>Restoration planning</li>
+</ul>
+<h3>Climate Change</h3>
+<ul>
+<li>Carbon cycle modeling</li>
+<li>Climate sensitivity analysis</li>
+<li>Phenology shifts</li>
+<li>Ecosystem adaptation</li>
+</ul>
+<h2>Performance Metrics</h2>
+<table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>RMSE</td>
+<td>√[(1/n)Σ(y-ŷ)²]</td>
+<td>NDVI prediction</td>
+</tr>
+<tr>
+<td>R²</td>
+<td>1 - SS_res/SS_tot</td>
+<td>Carbon modeling</td>
+</tr>
+<tr>
+<td>NSE</td>
+<td>1 - Σ(y-ŷ)²/Σ(y-ȳ)²</td>
+<td>Ecosystem models</td>
+</tr>
+<tr>
+<td>KGE</td>
+<td>Balance of r, bias, variability</td>
+<td>Overall performance</td>
+</tr>
+</table>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
