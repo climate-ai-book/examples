@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Climate Data Challenges and Preprocessing</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h4 {
+            font-size: 1em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin: 0 0 16px 0;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+            background-color: #0366d6;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 2: Climate Data Challenges and Preprocessing</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 2 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter presents comprehensive mathematical frameworks for addressing complex challenges in climate data preprocessing, including:</p>
+<ul>
+<li>Information-theoretic foundations for data analysis</li>
+<li>Stochastic modeling of missing data mechanisms</li>
+<li>Change-point detection and non-stationarity analysis</li>
+<li>Physics-informed preprocessing algorithms</li>
+<li>Multi-scale spectral analysis and decomposition</li>
+<li>Advanced quality control and outlier detection</li>
+<li>Bias correction and domain adaptation</li>
+<li>Uncertainty quantification in preprocessing pipelines</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-02-preprocessing/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_information_theory_preprocessing.ipynb
+│   ├── 02_missing_data_imputation.ipynb
+│   ├── 03_change_point_detection.ipynb
+│   ├── 04_physics_informed_preprocessing.ipynb
+│   ├── 05_multiscale_decomposition.ipynb
+│   └── 06_bias_correction.ipynb
+├── scripts/
+│   ├── missing_data_handler.py
+│   ├── quality_control.py
+│   ├── bias_correction_methods.py
+│   └── uncertainty_propagation.py
+└── data/
+    ├── sample_climate_data_missing.nc
+    ├── biased_model_output.nc
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Equations</h2>
+<h3>1. Information Theory for Preprocessing</h3>
+<p><strong>Differential Entropy:</strong></p>
+<pre><code>H(X) = -∫ p(x)log p(x) dx</code></pre>
+<p><strong>Mutual Information:</strong></p>
+<pre><code>I(X;Y) = ∫∫ p(x,y)log(p(x,y)/(p(x)p(y))) dx dy</code></pre>
+<p><strong>KL Divergence for bias detection:</strong></p>
+<pre><code>D_KL(P||Q) = ∫ p(x)log(p(x)/q(x)) dx</code></pre>
+<h3>2. Missing Data Mechanisms</h3>
+<p><strong>MCAR (Missing Completely at Random):</strong></p>
+<pre><code>P(M|Y,ψ) = P(M|ψ)</code></pre>
+<p><strong>MAR (Missing at Random):</strong></p>
+<pre><code>P(M|Y,ψ) = P(M|Y_obs,ψ)</code></pre>
+<p><strong>MNAR (Missing Not at Random):</strong></p>
+<pre><code>P(M|Y,ψ) = P(M|Y_obs,Y_mis,ψ)</code></pre>
+<h3>3. Matrix Completion Theory</h3>
+<p><strong>Nuclear norm minimization:</strong></p>
+<pre><code>min ||Z||_* subject to Z_ij = X_ij, (i,j)∈Ω
+where ||Z||_* = Σ_i σ_i(Z) (nuclear norm)</code></pre>
+<h3>4. Bayesian Imputation</h3>
+<p><strong>Posterior predictive distribution for missing values:</strong></p>
+<pre><code>p(Y_mis|Y_obs) = ∫ p(Y_mis|θ,Y_obs) p(θ|Y_obs) dθ</code></pre>
+<h3>5. Change-Point Detection</h3>
+<p><strong>Bayesian change-point analysis:</strong></p>
+<pre><code>P(τ_k=1|y_{1:T}) ∝ P(y_{1:k}|τ_k=1) P(y_{k+1:T}|τ_k=1) P(τ_k=1)</code></pre>
+<p><strong>Wavelet-based stationarity tests</strong></p>
+<h3>6. Physics-Informed Preprocessing</h3>
+<p><strong>Conservation law constraints (mass, energy, momentum):</strong></p>
+<pre><code>∂ρ/∂t + ∇·(ρv) = 0  (mass conservation)</code></pre>
+<p><strong>Thermodynamic consistency:</strong></p>
+<pre><code>p = ρR_dT_v  (ideal gas law)
+∂p/∂z = -ρg  (hydrostatic balance)</code></pre>
+<h3>7. Multi-Scale Analysis</h3>
+<p><strong>Kolmogorov energy cascade:</strong></p>
+<pre><code>E(k) = C_K ε^(2/3) k^(-5/3)</code></pre>
+<p><strong>Discrete wavelet transform:</strong></p>
+<pre><code>W(a,b) = (1/√a) ∫ x(t)ψ*((t-b)/a) dt</code></pre>
+<p><strong>Empirical Mode Decomposition (EMD):</strong></p>
+<pre><code>x(t) = Σ_{i=1}^n c_i(t) + r_n(t)</code></pre>
+<h3>8. Quality Control</h3>
+<p><strong>M-estimators and Huber loss:</strong></p>
+<pre><code>ρ(u) = { (1/2)u²         if |u| ≤ k
+       { k|u| - (1/2)k²  if |u| > k</code></pre>
+<p><strong>Generalized Extreme Value (GEV) distribution:</strong></p>
+<pre><code>F(x) = exp{-[1 + ξ(x-μ)/σ]^(-1/ξ)}</code></pre>
+<h3>9. Bias Correction</h3>
+<p><strong>Quantile mapping:</strong></p>
+<pre><code>X_c = F_ref^(-1)(F_raw(X_raw))</code></pre>
+<p><strong>Copula-based multivariate correction:</strong></p>
+<pre><code>F(x_1,...,x_d) = C(F_1(x_1),...,F_d(x_d))</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<p>Ensure you have the required packages installed (see main repository <code>requirements.txt</code>):</p>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 scikit-learn matplotlib pywavelets</code></pre>
+<h3>Jupyter Notebooks</h3>
+<p>Start Jupyter Lab and navigate to the notebooks folder:</p>
+<pre><code>cd chapter-02-preprocessing/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<p>Run individual scripts from the scripts folder:</p>
+<pre><code>cd chapter-02-preprocessing/scripts
+python missing_data_handler.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_information_theory_preprocessing.ipynb</h3>
+<ul>
+<li>Calculate entropy and mutual information for climate variables</li>
+<li>Use information-theoretic measures for feature selection</li>
+<li>Apply KL divergence for bias detection</li>
+<li>Visualize information flow in climate data</li>
+</ul>
+<h3>02_missing_data_imputation.ipynb</h3>
+<ul>
+<li>Classify missing data mechanisms</li>
+<li>Implement matrix completion for gap-filling</li>
+<li>Bayesian imputation with uncertainty quantification</li>
+<li>Compare imputation methods (mean, interpolation, advanced)</li>
+</ul>
+<h3>03_change_point_detection.ipynb</h3>
+<ul>
+<li>Bayesian change-point detection algorithms</li>
+<li>Wavelet-based non-stationarity tests</li>
+<li>Evolutionary spectral analysis</li>
+<li>Visualize regime changes in climate time series</li>
+</ul>
+<h3>04_physics_informed_preprocessing.ipynb</h3>
+<ul>
+<li>Enforce conservation laws in preprocessing</li>
+<li>Apply thermodynamic consistency constraints</li>
+<li>Constrained optimization for physically consistent data</li>
+<li>Validate against physical bounds</li>
+</ul>
+<h3>05_multiscale_decomposition.ipynb</h3>
+<ul>
+<li>Wavelet transform for multi-scale analysis</li>
+<li>Empirical Mode Decomposition (EMD)</li>
+<li>Spectral energy distribution analysis</li>
+<li>Multi-resolution climate signal decomposition</li>
+</ul>
+<h3>06_bias_correction.ipynb</h3>
+<ul>
+<li>Quantile mapping for distributional correction</li>
+<li>Copula-based multivariate bias correction</li>
+<li>Domain adaptation techniques</li>
+<li>Validate bias-corrected outputs</li>
+</ul>
+<h2>Performance Metrics</h2>
+<p>Key metrics for preprocessing evaluation:</p>
+<ul>
+<li><strong>Imputation accuracy:</strong> RMSE, MAE on held-out data</li>
+<li><strong>Conservation error:</strong> Violation of physical constraints</li>
+<li><strong>Bias reduction:</strong> KL divergence between corrected and reference</li>
+<li><strong>Uncertainty calibration:</strong> Coverage of prediction intervals</li>
+</ul>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials at: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request to the main repository.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<p>For questions specific to this chapter:</p>
+<ul>
+<li>Open an issue on GitHub</li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
