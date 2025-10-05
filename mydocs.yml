@@ -1,1 +1,79 @@
+site_name: AI in Climate Science
+site_description: Machine Learning for Environmental Modeling and Prediction
+site_author: Prof. Sandeep Gupta, Prof. Budesh Kanwer, Prof. Badrul Hisham Ahmad
+site_url: https://climate-ai-book.readthedocs.io
+repo_name: climate-ai-book/examples
+repo_url: https://github.com/climate-ai-book/examples
+theme:
+name: readthedocs
+highlightjs: true
+hljs_languages:
+- python
+- yaml
+navigation_depth: 3
+nav:
+
+Home: index.md
+Getting Started:
+
+Installation: installation.md
+Quick Start: quickstart.md
+
+
+Book Chapters:
+
+Chapter 1 - Introduction: chapters/chapter01.md
+Chapter 2 - Data Preprocessing: chapters/chapter02.md
+Chapter 3 - ML Fundamentals: chapters/chapter03.md
+Chapter 4 - Weather Prediction: chapters/chapter04.md
+Chapter 5 - Extreme Weather: chapters/chapter05.md
+Chapter 6 - Air Quality: chapters/chapter06.md
+Chapter 7 - Ocean Modeling: chapters/chapter07.md
+Chapter 8 - Cryosphere: chapters/chapter08.md
+Chapter 9 - Vegetation & Ecosystems: chapters/chapter09.md
+Chapter 10 - Carbon Cycle: chapters/chapter10.md
+Chapter 11 - Renewable Energy: chapters/chapter11.md
+Chapter 12 - Agriculture: chapters/chapter12.md
+Chapter 13 - Risk Assessment: chapters/chapter13.md
+Chapter 14 - Seasonal Prediction: chapters/chapter14.md
+Chapter 15 - Emerging Technologies: chapters/chapter15.md
+
+
+Tutorials:
+
+Information Theory: tutorials/information_theory.md
+Physics-Informed Networks: tutorials/pinns.md
+Uncertainty Quantification: tutorials/uncertainty.md
+
+
+API Reference:
+
+Data Loaders: api/data_loaders.md
+Models: api/models.md
+Utilities: api/utilities.md
+
+
+Resources:
+
+Datasets: resources/datasets.md
+Additional Reading: resources/reading.md
+Community: resources/community.md
+
+
+
+markdown_extensions:
+
+admonition
+codehilite
+meta
+toc:
+permalink: true
+
+extra:
+social:
+- icon: fontawesome/brands/github
+link: https://github.com/climate-ai-book/examples
+- icon: fontawesome/solid/globe
+link: https://climate-ai-book.org
+copyright: Copyright © 2025 AI in Climate Science - All rights reserved
 
