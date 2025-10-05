@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Carbon Cycle and Greenhouse Gas Modeling</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 10: Carbon Cycle and Greenhouse Gas Modeling</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 10 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter establishes comprehensive frameworks for AI-enhanced carbon cycle modeling, including:</p>
+<ul>
+<li>Mathematical foundations for carbon cycle modeling</li>
+<li>Knowledge-guided machine learning for agroecosystem carbon</li>
+<li>Agricultural greenhouse gas emissions prediction</li>
+<li>Atmospheric CO₂ concentration mapping and monitoring</li>
+<li>Life cycle assessment and emissions accounting</li>
+<li>Reinforcement learning for emissions reduction optimization</li>
+<li>Soil organic carbon mapping with 3D machine learning</li>
+<li>Waste management and circular economy applications</li>
+<li>Coastal ocean greenhouse gas fluxes</li>
+<li>Digital transformation and green innovation</li>
+<li>Tracking AI model carbon emissions</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-10-carbon-ghg-modeling/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_carbon_balance_terrestrial.ipynb
+│   ├── 02_knowledge_guided_ml_carbon.ipynb
+│   ├── 03_agricultural_n2o_prediction.ipynb
+│   ├── 04_xco2_mapping_satellite.ipynb
+│   ├── 05_life_cycle_assessment_ml.ipynb
+│   ├── 06_reinforcement_learning_emissions.ipynb
+│   ├── 07_soil_carbon_3d_mapping.ipynb
+│   └── 08_ai_carbon_footprint_tracking.ipynb
+├── scripts/
+│   ├── carbon_ghg_framework.py
+│   ├── kgml_carbon_model.py
+│   ├── agricultural_emissions_predictor.py
+│   └── rl_emissions_optimizer.py
+└── data/
+    ├── soil_emissions_time_series.csv
+    ├── xco2_satellite_data.nc
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Terrestrial Carbon Balance</h3>
+<p><strong>Fundamental Equation:</strong></p>
+<pre><code>dC_total/dt = NPP(I,T,W,N) - R_hetero(T,C_soil,θ) - F_harvest - F_fire - F_erosion
+Where:
+
+C_total: total ecosystem carbon
+NPP: net primary productivity
+I: light, T: temperature, W: water, N: nutrients
+R_hetero: heterotrophic respiration
+F terms: carbon loss pathways</code></pre>
+
+<h3>2. Greenhouse Gas Flux (Neural Network)</h3>
+<p><strong>Multi-factor Prediction:</strong></p>
+<pre><code>F_GHG = f_neural(E_substrate, P_microbial, T_soil, θ_soil, WFPS, pH, N_available)
+Gas types: CO₂, CH₄, N₂O</code></pre>
+<h3>3. Atmospheric XCO₂ Dynamics</h3>
+<p><strong>Advection-Diffusion with ML Sources:</strong></p>
+<pre><code>∂X_CO₂/∂t = -v·∇X_CO₂ + ∇·(D∇X_CO₂) + S_ML(x,t)</code></pre>
+<h3>4. Knowledge-Guided ML Loss</h3>
+<p><strong>Physics-Constrained Learning:</strong></p>
+<pre><code>L_KGML = L_data + λ_physics L_physics + λ_mass L_mass + λ_bounds L_bounds
+Components:
+
+L_data: prediction error
+L_physics: process constraints
+L_mass: mass conservation
+L_bounds: physical bounds</code></pre>
+
+<h3>5. Knowledge-Guided Carbon Flux</h3>
+<p><strong>Hybrid Architecture:</strong></p>
+<pre><code>Ĉ_flux = f_NN(X_input) · Φ_physical(X_input) + b_process
+N₂O Decomposition:
+F_N₂O = F_nitrif(T,θ,NH₄⁺) + F_denitrif(T,θ,NO₃⁻,DOC) + F_residual^ML</code></pre>
+<h3>6. Cumulative Emissions</h3>
+<p><strong>Temporal Integration:</strong></p>
+<pre><code>E_cumulative = ∫[t₀,tf] f_ML(M(t), C(t), S, H(t)) dt
+Where:
+
+M(t): management events
+C(t): climate variables
+S: soil properties
+H(t): crop phenology</code></pre>
+
+<h3>7. Soil CO₂ with LSTM</h3>
+<p><strong>Temporal Dependencies:</strong></p>
+<pre><code>F_CO₂(t) = LSTM({F_CO₂(t-kΔt)}_k, E_env(t), I_mgmt)</code></pre>
+<h3>8. Episodic N₂O Emissions</h3>
+<p><strong>Baseline + Pulses:</strong></p>
+<pre><code>F_N₂O(t) = F_baseline(S, C_annual) + Σᵢ Aᵢ·G(t-tᵢ, σᵢ(E))
+Captures fertilization-induced emission pulses</code></pre>
+<h3>9. XCO₂ Mapping</h3>
+<p><strong>Retrieval + Interpolation:</strong></p>
+<pre><code>X_CO₂(x,y,t) = f_retrieval(R_spectral, θ_view, p_surface) + g_interp(X_nearby, M_met)
+CNN Spatial Mapping:
+X_CO₂^map = CNN(X_CO₂^obs, M_winds, E_emis, V_veg)</code></pre>
+<h3>10. Life Cycle Assessment</h3>
+<p><strong>Multi-Stage Emissions:</strong></p>
+<pre><code>E_LCA = Σᵢ Eᵢ = Σᵢ fᵢ^ML(Iᵢ, Pᵢ, Tᵢ, E_grid)
+Optimization:
+minimize E_LCA(m,d) subject to C_safety(m,d) ≥ C_min, M_total(m) ≤ M_max</code></pre>
+<h3>11. Reinforcement Learning for Emissions</h3>
+<p><strong>Optimal Policy:</strong></p>
+<pre><code>π*(s) = argmax_π E[Σₜ γᵗ R(sₜ,aₜ)]
+Reward Function (Multi-objective):
+R(s,a) = w_prod·P_production(a) - w_emis·E_emissions(a) - w_cost·C_operation(a)</code></pre>
+<h3>12. 3D Soil Carbon Mapping</h3>
+<p><strong>Spatial + Depth Dependencies:</strong></p>
+<pre><code>SOC(x,y,z) = f_3D^ML(R_sat(x,y), T_terrain(x,y), C_climate(x,y), d(z))
+Depth Profile:
+SOC(z) = SOC_surface · exp(-β(z)), β(z) = f_NN(S_type, L_landuse, z)</code></pre>
+<h3>13. Ocean-Atmosphere Flux</h3>
+<p><strong>Coastal GHG Exchange:</strong></p>
+<pre><code>F_ocean-atm = f_ML(Δp_GHG, U₁₀, T_SST, S_sal, Chl, R_river, h_depth)</code></pre>
+<h3>14. AI Model Emissions</h3>
+<p><strong>Carbon Footprint:</strong></p>
+<pre><code>E_AI = Σₜ P(t)·Δt·ε_grid(t, location)
+Power Consumption:
+P(t) = P_GPU(u_GPU) + P_CPU(u_CPU) + P_memory(u_mem) + P_cooling</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 tensorflow torch scikit-learn matplotlib gym stable-baselines3</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-10-carbon-ghg-modeling/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-10-carbon-ghg-modeling/scripts
+python carbon_ghg_framework.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_carbon_balance_terrestrial.ipynb</h3>
+<ul>
+<li>Ecosystem carbon balance equations</li>
+<li>NPP and respiration modeling</li>
+<li>Carbon loss pathways</li>
+<li>Temporal dynamics</li>
+</ul>
+<h3>02_knowledge_guided_ml_carbon.ipynb</h3>
+<ul>
+<li>KGML architecture implementation</li>
+<li>Physics-informed loss functions</li>
+<li>Process constraint integration</li>
+<li>Interpretability analysis</li>
+</ul>
+<h3>03_agricultural_n2o_prediction.ipynb</h3>
+<ul>
+<li>Random forest for N₂O emissions</li>
+<li>Feature engineering for agriculture</li>
+<li>Episodic pulse detection</li>
+<li>Cumulative seasonal emissions</li>
+</ul>
+<h3>04_xco2_mapping_satellite.ipynb</h3>
+<ul>
+<li>Satellite XCO₂ retrieval</li>
+<li>Spatial gap-filling with CNN</li>
+<li>Temporal trend analysis</li>
+<li>Source/sink identification</li>
+</ul>
+<h3>05_life_cycle_assessment_ml.ipynb</h3>
+<ul>
+<li>Multi-stage emissions modeling</li>
+<li>Optimization for lightweighting</li>
+<li>Vehicle LCA comparison</li>
+<li>Scenario analysis</li>
+</ul>
+<h3>06_reinforcement_learning_emissions.ipynb</h3>
+<ul>
+<li>DQN for emissions optimization</li>
+<li>Fleet dispatching example</li>
+<li>Multi-objective rewards</li>
+<li>Policy evaluation</li>
+</ul>
+<h3>07_soil_carbon_3d_mapping.ipynb</h3>
+<ul>
+<li>3D CNN for SOC prediction</li>
+<li>Depth profile modeling</li>
+<li>Satellite covariate integration</li>
+<li>Uncertainty quantification</li>
+</ul>
+<h3>08_ai_carbon_footprint_tracking.ipynb</h3>
+<ul>
+<li>ML training emissions calculation</li>
+<li>Power consumption monitoring</li>
+<li>Carbon-aware scheduling</li>
+<li>Efficiency optimization</li>
+</ul>
+<h2>Applications</h2>
+<h3>Agriculture</h3>
+<ul>
+<li>Precision fertilization</li>
+<li>Soil carbon sequestration</li>
+<li>Emissions accounting</li>
+<li>Climate-smart farming</li>
+</ul>
+<h3>Atmospheric Monitoring</h3>
+<ul>
+<li>CO₂ concentration mapping</li>
+<li>Emission source detection</li>
+<li>Transport modeling</li>
+<li>Verification systems</li>
+</ul>
+<h3>Industry</h3>
+<ul>
+<li>Process optimization</li>
+<li>Life cycle assessment</li>
+<li>Supply chain emissions</li>
+<li>Carbon footprinting</li>
+</ul>
+<h3>Policy</h3>
+<ul>
+<li>National inventories</li>
+<li>Mitigation pathways</li>
+<li>Carbon pricing</li>
+<li>Compliance monitoring</li>
+</ul>
+<h2>Performance Metrics</h2>
+<table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>RMSE</td>
+<td>√[(1/n)Σ(E-Ê)²]</td>
+<td>Emission prediction</td>
+</tr>
+<tr>
+<td>Cumulative Error</td>
+<td>|Σ E - Σ Ê|</td>
+<td>Seasonal totals</td>
+</tr>
+<tr>
+<td>Peak Error</td>
+<td>|max(E) - max(Ê)|</td>
+<td>Pulse events</td>
+</tr>
+<tr>
+<td>NSE</td>
+<td>1 - Σ(E-Ê)²/Σ(E-Ē)²</td>
+<td>Overall performance</td>
+</tr>
+</table>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
