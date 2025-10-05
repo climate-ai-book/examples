@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Ocean Modeling with Artificial Intelligence</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 7: Ocean Modeling with Artificial Intelligence</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 7 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter establishes comprehensive theoretical foundations for AI-enhanced ocean modeling, including:</p>
+<ul>
+<li>Mathematical foundations of ocean dynamics and neural network integration</li>
+<li>Physics-informed neural networks for ocean circulation</li>
+<li>Advanced neural architectures for multi-scale ocean processes</li>
+<li>Marine ecosystem and biogeochemical modeling</li>
+<li>Ocean data assimilation and uncertainty quantification</li>
+<li>Computational implementation and performance optimization</li>
+<li>Validation and verification methodologies</li>
+<li>Future directions and research challenges</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-07-ocean-modeling/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_ocean_dynamics_equations.ipynb
+│   ├── 02_physics_informed_ocean_circulation.ipynb
+│   ├── 03_graph_neural_networks_ocean.ipynb
+│   ├── 04_marine_ecosystem_modeling.ipynb
+│   ├── 05_ocean_data_assimilation.ipynb
+│   ├── 06_sea_level_prediction.ipynb
+│   └── 07_ocean_climate_interactions.ipynb
+├── scripts/
+│   ├── ocean_modeling_framework.py
+│   ├── pinn_ocean_circulation.py
+│   ├── marine_biogeochemistry.py
+│   └── ocean_data_assimilation.py
+└── data/
+    ├── ocean_temperature_salinity.nc
+    ├── sea_surface_height.nc
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Ocean Primitive Equations</h3>
+<p><strong>Horizontal Momentum (with Coriolis):</strong></p>
+<pre><code>∂u/∂t + u∂u/∂x + v∂u/∂y + w∂u/∂z - fv = -(1/ρ₀)∂p/∂x + ∂/∂z(A_v ∂u/∂z) + F_u
+Where:
+
+u, v, w: velocity components
+f: Coriolis parameter
+ρ₀: reference density
+p: pressure
+A_v: vertical eddy viscosity
+F_u: horizontal mixing and forcing</code></pre>
+
+<p><strong>Continuity Equation:</strong></p>
+<pre><code>∂u/∂x + ∂v/∂y + ∂w/∂z = 0</code></pre>
+<h3>2. Physics-Informed Ocean Modeling</h3>
+<p><strong>Comprehensive PINN Loss:</strong></p>
+<pre><code>L_PINN = L_data + λ_momentum L_momentum + λ_continuity L_continuity + λ_thermal L_thermal + λ_bc L_boundary
+Components:
+
+L_data: satellite altimetry, Argo floats, moorings
+L_momentum: Coriolis and pressure gradients
+L_continuity: mass conservation
+L_thermal: temperature/salinity evolution
+L_boundary: air-sea exchange, bottom boundaries</code></pre>
+
+<p><strong>Geostrophic Balance:</strong></p>
+<pre><code>L_geostrophic = ∫_Ω [(fu + (1/ρ₀)∂p/∂y)² + (fv - (1/ρ₀)∂p/∂x)²] dΩ</code></pre>
+<p><strong>Hydrostatic Balance:</strong></p>
+<pre><code>∂p/∂z = -ρg</code></pre>
+<h3>3. Graph Neural Networks for Ocean Grids</h3>
+<p><strong>Message Passing with Bathymetry:</strong></p>
+<pre><code>h_i^(l+1) = UPDATE(h_i^(l), AGGREGATE({h_j^(l) : j∈N(i)})) · W_bathy(z_i)
+Where:
+
+h_i: hidden state of grid cell i
+N(i): neighboring cells
+W_bathy: depth-dependent weighting
+z_i: bathymetric depth</code></pre>
+
+<p><strong>Spherical Positional Encoding:</strong></p>
+<pre><code>PE(lat,lon,t) = [sin(lat/10000^{2i/d}), cos(lat/10000^{2i/d}),
+                 sin(lon/10000^{2i/d}), cos(lon/10000^{2i/d}),
+                 sin(2πt/T_annual), cos(2πt/T_annual)]</code></pre>
+<h3>4. Marine Ecosystem Modeling</h3>
+<p><strong>Primary Productivity:</strong></p>
+<pre><code>P_primary = f_neural(PAR, SST, [NO₃], [PO₄], MLD, SSS) · ∏_i L_i(env_i)
+Variables:
+
+PAR: photosynthetically available radiation
+SST: sea surface temperature
+MLD: mixed layer depth
+SSS: sea surface salinity
+L_i: environmental limitation functions</code></pre>
+
+<p><strong>Carbon Cycle:</strong></p>
+<pre><code>dC_i/dt = Σ_j k_ij(T,pH)·C_j - Σ_k k_ki(T,pH)·C_i + S_i - R_i
+Components:
+
+C_i: carbon pools
+k_ij: transformation rates (T and pH dependent)
+S_i: sources (production, air-sea exchange)
+R_i: removal (respiration, sedimentation)</code></pre>
+
+<h3>5. Ocean Data Assimilation</h3>
+<p><strong>Neural Network-Enhanced 4D-Var:</strong></p>
+<pre><code>J(x) = (1/2)(x-x_b)^T B^{-1}(x-x_b) + (1/2)Σ_i(y_i - H_neural(x_i))^T R_i^{-1}(y_i - H_neural(x_i))
+Where:
+
+x: ocean state vector
+x_b: background state
+B: background error covariance
+H_neural: neural network observation operator
+R_i: observation error covariance</code></pre>
+
+<p><strong>Ensemble Kalman Filter:</strong></p>
+<pre><code>x_a,i^ocean = x_f,i^ocean + K_neural(y_obs + ε_i - H_neural(x_f,i^ocean)) ⊙ L_learned
+Components:
+
+x_a: analysis ensemble
+x_f: forecast ensemble
+K_neural: NN-enhanced Kalman gain
+L_learned: adaptive localization weights</code></pre>
+
+<h3>6. Validation Metrics</h3>
+<p><strong>Comprehensive Ocean Validation:</strong></p>
+<pre><code>V_ocean = α·RMSE_spatial + β·CORR_temporal + γ·BIAS_systematic + δ·SKILL_extreme
+Metrics:
+
+RMSE_spatial: spatially-averaged root mean square error
+CORR_temporal: temporal correlation preservation
+BIAS_systematic: regional systematic biases
+SKILL_extreme: extreme event capture (heatwaves, anomalies)</code></pre>
+
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 torch torch-geometric scikit-learn matplotlib cartopy cmocean</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-07-ocean-modeling/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-07-ocean-modeling/scripts
+python ocean_modeling_framework.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_ocean_dynamics_equations.ipynb</h3>
+<ul>
+<li>Implement primitive equations for ocean</li>
+<li>Coriolis effects and geostrophic balance</li>
+<li>Hydrostatic approximation</li>
+<li>Thermodynamic coupling</li>
+</ul>
+<h3>02_physics_informed_ocean_circulation.ipynb</h3>
+<ul>
+<li>PINN implementation for ocean circulation</li>
+<li>Geostrophic constraint enforcement</li>
+<li>Mass conservation preservation</li>
+<li>Boundary condition handling</li>
+</ul>
+<h3>03_graph_neural_networks_ocean.ipynb</h3>
+<ul>
+<li>GNN for irregular ocean grids</li>
+<li>Bathymetric constraint integration</li>
+<li>Coastal geometry handling</li>
+<li>Adaptive mesh refinement</li>
+</ul>
+<h3>04_marine_ecosystem_modeling.ipynb</h3>
+<ul>
+<li>Primary productivity neural networks</li>
+<li>Trophic interaction modeling</li>
+<li>Biogeochemical cycling</li>
+<li>Carbon sequestration processes</li>
+</ul>
+<h3>05_ocean_data_assimilation.ipynb</h3>
+<ul>
+<li>Neural network-enhanced 4D-Var</li>
+<li>Ensemble Kalman filtering</li>
+<li>Multi-platform data fusion</li>
+<li>Uncertainty quantification</li>
+</ul>
+<h3>06_sea_level_prediction.ipynb</h3>
+<ul>
+<li>Sea surface height forecasting</li>
+<li>Storm surge prediction</li>
+<li>Tide modeling with neural networks</li>
+<li>Long-term sea level trends</li>
+</ul>
+<h3>07_ocean_climate_interactions.ipynb</h3>
+<ul>
+<li>ENSO prediction with neural networks</li>
+<li>Ocean heat content modeling</li>
+<li>Climate feedback mechanisms</li>
+<li>Coupled ocean-atmosphere systems</li>
+</ul>
+<h2>Applications</h2>
+<h3>Ocean Circulation</h3>
+<ul>
+<li>Gulf Stream prediction</li>
+<li>Mesoscale eddy tracking</li>
+<li>Thermohaline circulation</li>
+<li>Coastal currents</li>
+</ul>
+<h3>Marine Ecosystems</h3>
+<ul>
+<li>Fisheries management</li>
+<li>Harmful algal bloom prediction</li>
+<li>Coral reef monitoring</li>
+<li>Ocean acidification impacts</li>
+</ul>
+<h3>Climate Applications</h3>
+<ul>
+<li>ENSO forecasting</li>
+<li>Ocean heat uptake</li>
+<li>Sea level rise prediction</li>
+<li>Marine heatwave detection</li>
+</ul>
+<h2>Performance Metrics</h2>
+<table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>RMSE</td>
+<td>√[(1/n)Σ(y-ŷ)²]</td>
+<td>Overall accuracy</td>
+</tr>
+<tr>
+<td>ACC</td>
+<td>Σ(f-c̄)(o-c̄)/√[Σ(f-c̄)²Σ(o-c̄)²]</td>
+<td>Anomaly correlation</td>
+</tr>
+<tr>
+<td>Pattern Correlation</td>
+<td>Corr(spatial patterns)</td>
+<td>Circulation patterns</td>
+</tr>
+<tr>
+<td>Conservation Error</td>
+<td>|(∂M/∂t) - sources + sinks|</td>
+<td>Mass/energy conservation</td>
+</tr>
+</table>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
