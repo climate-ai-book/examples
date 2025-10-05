@@ -1,4 +1,4 @@
-# Chapter 5: Extreme Weather Event PredictionThis folder contains code examples, notebooks, and datasets accompanying Chapter 5 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."Chapter OverviewThis chapter develops comprehensive mathematical frameworks for AI-enhanced extreme weather prediction, including:
+# Chapter 5: Extreme Weather Event Prediction - This folder contains code examples, notebooks, and datasets accompanying Chapter 5 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."Chapter OverviewThis chapter develops comprehensive mathematical frameworks for AI-enhanced extreme weather prediction, including:
 Mathematical foundations of extreme weather prediction
 Deep learning architectures for extreme event detection
 Physics-informed neural networks for extreme weather dynamics
