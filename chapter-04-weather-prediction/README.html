@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: AI-Enhanced Weather Prediction</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h4 {
+            font-size: 1em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 4: AI-Enhanced Weather Prediction</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 4 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter establishes comprehensive mathematical foundations for AI-enhanced weather prediction, including:</p>
+<ul>
+<li>Theoretical foundations of AI-enhanced atmospheric modeling</li>
+<li>Deep learning architectures for spatiotemporal weather modeling</li>
+<li>Physics-informed neural networks for atmospheric dynamics</li>
+<li>Advanced ensemble methods and uncertainty quantification</li>
+<li>Spectral methods and multi-scale atmospheric modeling</li>
+<li>Operational implementation and real-time deployment</li>
+<li>Advanced evaluation metrics and validation frameworks</li>
+<li>Integration with Earth system models</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-04-weather-prediction/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_atmospheric_dynamics_nn.ipynb
+│   ├── 02_convlstm_weather_forecasting.ipynb
+│   ├── 03_physics_informed_weather_models.ipynb
+│   ├── 04_ensemble_uncertainty_quantification.ipynb
+│   ├── 05_spectral_methods_weather.ipynb
+│   ├── 06_transformer_global_weather.ipynb
+│   └── 07_forecast_verification.ipynb
+├── scripts/
+│   ├── weather_prediction_framework.py
+│   ├── convlstm_nowcasting.py
+│   ├── pinn_atmospheric_dynamics.py
+│   └── ensemble_forecasting.py
+└── data/
+    ├── sample_weather_data.nc
+    ├── reanalysis_subset.nc
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Primitive Equations of Atmospheric Dynamics</h3>
+<p><strong>Momentum Equations:</strong></p>
+<pre><code>∂u/∂t = -u∂u/∂x - v∂u/∂y - ω∂u/∂p + fv - (1/ρ)∂p/∂x + F_x
+∂v/∂t = -u∂v/∂x - v∂v/∂y - ω∂v/∂p - fu - (1/ρ)∂p/∂y + F_y</code></pre>
+<p><strong>Continuity Equation:</strong></p>
+<pre><code>∂ω/∂p + ∂u/∂x + ∂v/∂y = 0</code></pre>
+<p><strong>Thermodynamic Equation:</strong></p>
+<pre><code>∂T/∂t = -u∂T/∂x - v∂T/∂y - ω∂T/∂p + (Rω T)/(c_p p) + Q/c_p</code></pre>
+<h3>2. Universal Approximation for Atmospheric Functions</h3>
+<pre><code>f(x) ≈ Σ_{i=1}^N w_i σ(v_i^T x + b_i) + w_0</code></pre>
+<h3>3. Spherical Harmonic Expansion</h3>
+<pre><code>φ(λ,θ,t) = Σ_{n=0}^N Σ_{m=-n}^n φ_n^m(t) Y_n^m(λ,θ)</code></pre>
+<h3>4. Deep Learning Architectures</h3>
+<p><strong>Spherical Convolution:</strong></p>
+<pre><code>(X *_sphere W)_{i,j} = Σ_{m,n} X_{i+m,j+n} · W_{m,n} · J(i,j,m,n)</code></pre>
+<p><strong>Circular Convolution (Longitude):</strong></p>
+<pre><code>(X *_circ W)_{i,j} = Σ_{m,n} X_{i,(j+n) mod N_λ} W_{m,n}</code></pre>
+<p><strong>LSTM Gates:</strong></p>
+<pre><code>f_t = σ(W_f · [h_{t-1}, x_t] + b_f)    # Forget gate
+i_t = σ(W_i · [h_{t-1}, x_t] + b_i)    # Input gate
+C̃_t = tanh(W_C · [h_{t-1}, x_t] + b_C) # Candidate
+C_t = f_t ⊙ C_{t-1} + i_t ⊙ C̃_t        # Cell state
+o_t = σ(W_o · [h_{t-1}, x_t] + b_o)    # Output gate
+h_t = o_t ⊙ tanh(C_t)                   # Hidden state</code></pre>
+<p><strong>ConvLSTM:</strong></p>
+<pre><code>f_t = σ(W_xf * X_t + W_hf * H_{t-1} + b_f)
+i_t = σ(W_xi * X_t + W_hi * H_{t-1} + b_i)
+o_t = σ(W_xo * X_t + W_ho * H_{t-1} + b_o)
+g_t = tanh(W_xg * X_t + W_hg * H_{t-1} + b_g)
+C_t = f_t ⊙ C_{t-1} + i_t ⊙ g_t
+H_t = o_t ⊙ tanh(C_t)</code></pre>
+<p><strong>Transformer Attention:</strong></p>
+<pre><code>Attention(Q,K,V) = softmax(QK^T/√d_k) V
+MultiHead(Q,K,V) = Concat(head_1,...,head_h)W^O</code></pre>
+<p><strong>Positional Encoding (Spatiotemporal):</strong></p>
+<pre><code>PE(lat,lon,t,2i) = sin(lat/10000^{2i/d}) + sin(lon/10000^{2i/d}) + sin(t/10000^{2i/d})
+PE(lat,lon,t,2i+1) = cos(lat/10000^{2i/d}) + cos(lon/10000^{2i/d}) + cos(t/10000^{2i/d})</code></pre>
+<h3>5. Physics-Informed Neural Networks (PINNs)</h3>
+<p><strong>Total Loss Function:</strong></p>
+<pre><code>L_total = L_data + λ_pde L_pde + λ_bc L_bc + λ_ic L_ic</code></pre>
+<p><strong>PDE Residual Losses:</strong></p>
+<pre><code>L_momentum = (1/N)Σ|∂u/∂t + u∂u/∂x + v∂u/∂y - fv + (1/ρ)∂p/∂x|²
+             + |∂v/∂t + u∂v/∂x + v∂v/∂y + fu + (1/ρ)∂p/∂y|²
+L_continuity = (1/N)Σ|∂u/∂x + ∂v/∂y + ∂ω/∂p|²
+L_thermodynamic = (1/N)Σ|∂T/∂t + u∂T/∂x + v∂T/∂y + ω∂T/∂p - (RωT)/(c_p p) - Q/c_p|²</code></pre>
+<h3>6. Ensemble Methods</h3>
+<p><strong>Ensemble Mean:</strong></p>
+<pre><code>x̄(t) = (1/M)Σ_{i=1}^M x^(i)(t)</code></pre>
+<p><strong>Ensemble Spread:</strong></p>
+<pre><code>σ²(t) = (1/(M-1))Σ_{i=1}^M |x^(i)(t) - x̄(t)|²</code></pre>
+<p><strong>Bayesian Predictive Distribution:</strong></p>
+<pre><code>p(y*|x*,D) = ∫ p(y*|x*,w) p(w|D) dw</code></pre>
+<p><strong>Monte Carlo Dropout:</strong></p>
+<pre><code>p(y*|x*,D) ≈ (1/T)Σ_{t=1}^T f(x*; w_t)</code></pre>
+<p><strong>Deep Ensemble:</strong></p>
+<pre><code>p(y*|x*) = (1/K)Σ_{k=1}^K p_k(y*|x*)</code></pre>
+<p><strong>Extreme Value Theory:</strong></p>
+<pre><code>GEV: F(x;μ,σ,ξ) = exp{-[1 + ξ(x-μ)/σ]^{-1/ξ}}
+GPD: F(x;σ,ξ) = 1 - (1 + ξx/σ)^{-1/ξ}</code></pre>
+<h3>7. Verification Metrics</h3>
+<p><strong>Basic Metrics:</strong></p>
+<pre><code>MAE = (1/n)Σ|f_i - o_i|
+RMSE = √[(1/n)Σ(f_i - o_i)²]
+ACC = Σ(f_i - c̄)(o_i - c̄)/√[Σ(f_i - c̄)² Σ(o_i - c̄)²]</code></pre>
+<p><strong>Probabilistic Metrics:</strong></p>
+<pre><code>Brier Score: BS = (1/n)Σ(p_i - o_i)²
+CRPS: CRPS = (1/m)Σ|x_i - x_o| - (1/2m²)Σ_i Σ_j |x_i - x_j|
+Energy Score: ES = (1/m)Σ||X_i - x||₂ - (1/2m²)Σ_i Σ_j ||X_i - X_j||₂</code></pre>
+<p><strong>Spatial Metrics:</strong></p>
+<pre><code>FSS = 1 - MSE/MSE_ref
+SAL: S (structure), A (amplitude), L (location)</code></pre>
+<h3>8. Spectral Methods</h3>
+<p><strong>Fourier Neural Operator:</strong></p>
+<pre><code>F^{-1}(σ(W · F(v)))</code></pre>
+<p><strong>Continuous Wavelet Transform:</strong></p>
+<pre><code>W(a,b) = (1/√a)∫ x(t)ψ*((t-b)/a) dt</code></pre>
+<p><strong>Morlet Wavelet:</strong></p>
+<pre><code>ψ(t) = π^{-1/4} e^{iω_0 t} e^{-t²/2}</code></pre>
+<h3>9. Computational Optimization</h3>
+<p><strong>Complexity Analysis:</strong></p>
+<pre><code>Forward: O = Σ_{l=1}^L n_{l-1} × n_l
+Convolution: O = H × W × C × K × k²
+Attention: O = n² × d + n × d²</code></pre>
+<p><strong>Knowledge Distillation:</strong></p>
+<pre><code>L_distill = (1-α)L_student(y,σ(z_s)) + αL_KD(σ(z_s/T), σ(z_t/T))</code></pre>
+<p><strong>Quantization:</strong></p>
+<pre><code>w_q = round(w/Δ) × Δ</code></pre>
+<p><strong>Gradient Checkpointing:</strong></p>
+<pre><code>Memory = O(√L)
+Computation = O(L + √L)</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 tensorflow torch matplotlib cartopy pywt scikit-learn</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-04-weather-prediction/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-04-weather-prediction/scripts
+python weather_prediction_framework.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_atmospheric_dynamics_nn.ipynb</h3>
+<ul>
+<li>Implement primitive equations</li>
+<li>Neural network approximations</li>
+<li>Universal approximation demonstrations</li>
+<li>Spherical harmonic decomposition</li>
+</ul>
+<h3>02_convlstm_weather_forecasting.ipynb</h3>
+<ul>
+<li>ConvLSTM architecture implementation</li>
+<li>Nowcasting with radar data</li>
+<li>Spatiotemporal prediction</li>
+<li>Precipitation forecasting</li>
+</ul>
+<h3>03_physics_informed_weather_models.ipynb</h3>
+<ul>
+<li>PINN implementation for atmospheric PDEs</li>
+<li>Conservation law enforcement</li>
+<li>Automatic differentiation</li>
+<li>Physics consistency validation</li>
+</ul>
+<h3>04_ensemble_uncertainty_quantification.ipynb</h3>
+<ul>
+<li>Bayesian neural networks</li>
+<li>Monte Carlo dropout</li>
+<li>Deep ensembles</li>
+<li>Extreme event prediction</li>
+<li>CRPS and Brier score computation</li>
+</ul>
+<h3>05_spectral_methods_weather.ipynb</h3>
+<ul>
+<li>Fourier analysis of atmospheric fields</li>
+<li>Wavelet decomposition</li>
+<li>Multi-scale analysis</li>
+<li>Spectral power distribution</li>
+</ul>
+<h3>06_transformer_global_weather.ipynb</h3>
+<ul>
+<li>Transformer architecture for weather</li>
+<li>Multi-head attention mechanisms</li>
+<li>Spatiotemporal positional encoding</li>
+<li>Global weather modeling</li>
+</ul>
+<h3>07_forecast_verification.ipynb</h3>
+<ul>
+<li>Comprehensive verification metrics</li>
+<li>Probabilistic forecast evaluation</li>
+<li>Spatial verification methods</li>
+<li>Extreme event metrics</li>
+</ul>
+<h2>Applications</h2>
+<h3>Nowcasting (0-6 hours)</h3>
+<ul>
+<li>Precipitation prediction</li>
+<li>Storm tracking</li>
+<li>Severe weather warnings</li>
+</ul>
+<h3>Short-term Forecasting (1-3 days)</h3>
+<ul>
+<li>Temperature and precipitation</li>
+<li>Wind forecasts</li>
+<li>Aviation weather</li>
+</ul>
+<h3>Medium-range Forecasting (3-10 days)</h3>
+<ul>
+<li>Synoptic patterns</li>
+<li>Ensemble predictions</li>
+<li>Probabilistic forecasts</li>
+</ul>
+<h3>Extended-range (10-30 days)</h3>
+<ul>
+<li>Subseasonal predictions</li>
+<li>Tropical systems</li>
+<li>Pattern recognition</li>
+</ul>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
