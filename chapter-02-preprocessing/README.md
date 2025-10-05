@@ -1,4 +1,4 @@
-# Chapter 2: Climate Data Challenges and PreprocessingThis folder contains code examples, notebooks, and datasets accompanying Chapter 2 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."Chapter OverviewThis chapter presents comprehensive mathematical frameworks for addressing complex challenges in climate data preprocessing, including:
+# Chapter 2: Climate Data Challenges and Preprocessing - This folder contains code examples, notebooks, and datasets accompanying Chapter 2 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."Chapter OverviewThis chapter presents comprehensive mathematical frameworks for addressing complex challenges in climate data preprocessing, including:
 Information-theoretic foundations for data analysis
 Stochastic modeling of missing data mechanisms
 Change-point detection and non-stationarity analysis
