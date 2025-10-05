@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Cryosphere Monitoring and Prediction</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 8: Cryosphere Monitoring and Prediction</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 8 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter establishes comprehensive frameworks for AI-enhanced cryospheric research, including:</p>
+<ul>
+<li>Introduction to cryospheric artificial intelligence</li>
+<li>Mathematical foundations for cryospheric AI modeling</li>
+<li>Deep learning for Arctic sea ice monitoring</li>
+<li>Glacier monitoring and boundary detection</li>
+<li>Permafrost temperature prediction and modeling</li>
+<li>Radio-echo sounding and ice thickness analysis</li>
+<li>Ensemble methods and uncertainty quantification</li>
+<li>Computational implementation and optimization</li>
+<li>Validation and performance assessment</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-08-cryosphere-monitoring/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_ice_energy_balance.ipynb
+│   ├── 02_sea_ice_classification_cnn.ipynb
+│   ├── 03_glacier_boundary_detection.ipynb
+│   ├── 04_permafrost_temperature_lstm.ipynb
+│   ├── 05_radio_echo_sounding_ai.ipynb
+│   ├── 06_ensemble_uncertainty_cryo.ipynb
+│   └── 07_satellite_imagery_processing.ipynb
+├── scripts/
+│   ├── cryosphere_monitoring_framework.py
+│   ├── sea_ice_classifier.py
+│   ├── glacier_tracking.py
+│   └── permafrost_predictor.py
+└── data/
+    ├── sar_sea_ice_images/
+    ├── glacier_boundaries.shp
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Ice Energy Balance</h3>
+<p><strong>Fundamental Energy Equation:</strong></p>
+<pre><code>ρ_i c_i ∂T/∂t = k_i ∇²T + Q_rad + Q_sens + Q_lat + Q_cond
+Where:
+
+ρ_i: ice density
+c_i: specific heat capacity
+T: temperature
+k_i: thermal conductivity
+Q terms: radiative, sensible, latent, and conductive heat fluxes</code></pre>
+
+<h3>2. Ice Velocity Neural Network</h3>
+<p><strong>Velocity Prediction:</strong></p>
+<pre><code>v_ice = f_neural(τ, T, ρ, h) + v_basal(φ, p_w)
+Inputs:
+
+τ: stress
+T: temperature
+ρ: density
+h: thickness
+φ: bed slope
+p_w: water pressure</code></pre>
+
+<h3>3. Permafrost Temperature</h3>
+<p><strong>Subsurface Heat Transfer:</strong></p>
+<pre><code>∂T_soil/∂t = α_soil ∂²T_soil/∂z² + (1/ρ_soil c_soil)[Q_surface + Q_geothermal]
+Active Layer Thickness:
+ALT = ∫₀^z_thaw H(T_soil(z,t_max) - T_freeze) dz</code></pre>
+<h3>4. Sea Ice Classification</h3>
+<p><strong>CNN for Ice Type Detection:</strong></p>
+<pre><code>P_ice(x,y) = σ(Σ_k W_k * I_SAR(x,y) + b_k)
+Ice types: new ice, young ice, first-year ice, multi-year ice</code></pre>
+<p><strong>Multi-Sensor Fusion:</strong></p>
+<pre><code>F_fusion = Attention(F_SAR, F_optical) · W_temporal + F_contextual</code></pre>
+<h3>5. Glacier Boundary Detection</h3>
+<p><strong>Edge Detection:</strong></p>
+<pre><code>E_glacier(x,y) = max_{s∈S} |∇[G_s * I_satellite(x,y)]| · M_learned(x,y)
+Surface Velocity:
+v_surface(x,y,t) = (1/Δt)[r(x,y,t+Δt) - r(x,y,t)] + v_correction</code></pre>
+<h3>6. Permafrost Neural Prediction</h3>
+<p><strong>LSTM Model:</strong></p>
+<pre><code>T_permafrost(z,t) = f_neural(T_air(t), P_precip(t), R_solar(t), W_wind(t), θ_soil, V_veg)
+Environmental inputs:
+
+Air temperature
+Precipitation
+Solar radiation
+Wind speed
+Soil properties
+Vegetation cover</code></pre>
+
+<h3>7. Radio-Echo Sounding</h3>
+<p><strong>Signal Processing:</strong></p>
+<pre><code>S_processed(t) = CNN(W_filter * S_raw(t) + b) · G_gain(t)
+Ice Thickness:
+h_ice = (c·t_travel)/(2√ε_r) · Correction_neural(θ, ρ_ice, T)</code></pre>
+<h3>8. Ensemble Methods</h3>
+<p><strong>Ensemble Prediction:</strong></p>
+<pre><code>ŷ_ensemble = Σ_i w_i·ŷ_i + ε_ensemble
+Bayesian Uncertainty:
+p(y*|x*,D) = ∫ p(y*|x*,θ) p(θ|D) dθ</code></pre>
+<h3>9. Validation Metrics</h3>
+<p><strong>Comprehensive Assessment:</strong></p>
+<pre><code>V_cryo = α·RMSE_spatial + β·Corr_temporal + γ·Bias_systematic + δ·Skill_physical</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 tensorflow torch opencv-python scikit-learn matplotlib rasterio geopandas</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-08-cryosphere-monitoring/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-08-cryosphere-monitoring/scripts
+python cryosphere_monitoring_framework.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_ice_energy_balance.ipynb</h3>
+<ul>
+<li>Ice surface energy balance equations</li>
+<li>Thermodynamic modeling</li>
+<li>Heat flux calculations</li>
+<li>Phase transition processes</li>
+</ul>
+<h3>02_sea_ice_classification_cnn.ipynb</h3>
+<ul>
+<li>CNN architecture for SAR imagery</li>
+<li>Ice type classification (new, first-year, multi-year)</li>
+<li>Multi-sensor data fusion</li>
+<li>Ice concentration estimation</li>
+</ul>
+<h3>03_glacier_boundary_detection.ipynb</h3>
+<ul>
+<li>Automated glacier outline extraction</li>
+<li>Terminus position tracking</li>
+<li>Surface velocity estimation</li>
+<li>Mass balance assessment</li>
+</ul>
+<h3>04_permafrost_temperature_lstm.ipynb</h3>
+<ul>
+<li>LSTM for temperature prediction</li>
+<li>Active layer thickness estimation</li>
+<li>Freeze-thaw cycle modeling</li>
+<li>Spatial distribution mapping</li>
+</ul>
+<h3>05_radio_echo_sounding_ai.ipynb</h3>
+<ul>
+<li>Automated radar signal interpretation</li>
+<li>Ice thickness extraction</li>
+<li>Internal layer detection</li>
+<li>Basal condition classification</li>
+</ul>
+<h3>06_ensemble_uncertainty_cryo.ipynb</h3>
+<ul>
+<li>Multi-model ensemble methods</li>
+<li>Bayesian uncertainty quantification</li>
+<li>Probabilistic forecasting</li>
+<li>Confidence interval estimation</li>
+</ul>
+<h3>07_satellite_imagery_processing.ipynb</h3>
+<ul>
+<li>Landsat and Sentinel-2 processing</li>
+<li>SAR data interpretation</li>
+<li>Cloud masking and filtering</li>
+<li>Time series analysis</li>
+</ul>
+<h2>Applications</h2>
+<h3>Arctic Sea Ice</h3>
+<ul>
+<li>Ice extent monitoring</li>
+<li>Ice type classification</li>
+<li>Ice motion tracking</li>
+<li>Seasonal forecasting</li>
+</ul>
+<h3>Glaciers and Ice Sheets</h3>
+<ul>
+<li>Glacier retreat monitoring</li>
+<li>Calving event detection</li>
+<li>Surface velocity mapping</li>
+<li>Mass balance estimation</li>
+</ul>
+<h3>Permafrost</h3>
+<ul>
+<li>Temperature regime monitoring</li>
+<li>Active layer thickness prediction</li>
+<li>Thermokarst detection</li>
+<li>Infrastructure risk assessment</li>
+</ul>
+<h3>Snow Cover</h3>
+<ul>
+<li>Snow extent mapping</li>
+<li>Snow depth estimation</li>
+<li>Albedo calculation</li>
+<li>Snowmelt timing prediction</li>
+</ul>
+<h2>Performance Metrics</h2>
+<table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>Overall Accuracy</td>
+<td>(TP+TN)/(TP+TN+FP+FN)</td>
+<td>Ice classification</td>
+</tr>
+<tr>
+<td>IoU</td>
+<td>TP/(TP+FP+FN)</td>
+<td>Glacier boundary</td>
+</tr>
+<tr>
+<td>RMSE</td>
+<td>√[(1/n)Σ(y-ŷ)²]</td>
+<td>Temperature prediction</td>
+</tr>
+<tr>
+<td>R²</td>
+<td>1 - SS_res/SS_tot</td>
+<td>Velocity estimation</td>
+</tr>
+</table>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
