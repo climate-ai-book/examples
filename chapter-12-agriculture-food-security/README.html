@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: Agricultural and Food Security Applications</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 12: Agricultural and Food Security Applications</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 12 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter establishes comprehensive frameworks for AI-enhanced agricultural modeling and food security assessment, including:</p>
+<ul>
+<li>Mathematical foundations for agricultural modeling</li>
+<li>Crop yield prediction from remote sensing</li>
+<li>Food security monitoring and early warning systems</li>
+<li>Computer vision for food quality and safety detection</li>
+<li>Precision agriculture and spatial planning</li>
+<li>Crop disease and pest detection</li>
+<li>Climate change adaptation in agriculture</li>
+<li>Sustainable agricultural systems</li>
+<li>Agricultural supply chain optimization</li>
+<li>Validation frameworks and uncertainty quantification</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-12-agriculture-food-security/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_crop_growth_modeling.ipynb
+│   ├── 02_yield_prediction_remote_sensing.ipynb
+│   ├── 03_food_security_monitoring.ipynb
+│   ├── 04_computer_vision_food_quality.ipynb
+│   ├── 05_precision_agriculture.ipynb
+│   ├── 06_disease_pest_detection.ipynb
+│   ├── 07_climate_adaptation_agriculture.ipynb
+│   └── 08_supply_chain_optimization.ipynb
+├── scripts/
+│   ├── agriculture_framework.py
+│   ├── crop_yield_predictor.py
+│   ├── food_security_classifier.py
+│   └── disease_detector.py
+└── data/
+    ├── crop_yield_data.csv
+    ├── vegetation_indices_time_series.csv
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Crop Growth Equation</h3>
+<p><strong>Biomass Dynamics:</strong></p>
+<pre><code>dB/dt = μ(I,T,W,N)·B - R(T)·B - L_senescence
+Where:
+
+B: crop biomass
+μ: specific growth rate (light, temp, water, nutrients)
+R: respiration rate
+L_senescence: senescence loss</code></pre>
+
+<h3>2. Neural Network Yield Prediction</h3>
+<p><strong>Multi-Factor Model:</strong></p>
+<pre><code>Y = f_neural(W_weather, S_soil, M_management, V_vegetation, P_phenology) · Y_potential
+Inputs:
+
+Weather variables
+Soil properties
+Management practices
+Vegetation indices (NDVI, EVI, LAI)
+Phenological stage</code></pre>
+
+<h3>3. Spatial Yield with CNN</h3>
+<p><strong>Gridded Prediction:</strong></p>
+<pre><code>Y(x,y) = CNN(I_satellite(x,y), S_soil(x,y), T_topography(x,y))</code></pre>
+<h3>4. Food Security Index</h3>
+<p><strong>Multi-Dimensional Assessment:</strong></p>
+<pre><code>FSI(r,t) = g_ML(P_production(r,t), A_access(r,t), U_utilization(r,t), S_stability(r,t-k:t))
+Four pillars:
+
+Production: availability
+Access: economic/physical
+Utilization: nutritional adequacy
+Stability: temporal consistency</code></pre>
+
+<h3>5. Remote Sensing Yield (LSTM)</h3>
+<p><strong>Temporal Vegetation Series:</strong></p>
+<pre><code>Y_forecast = LSTM({NDVI(tᵢ), EVI(tᵢ), LAI(tᵢ)}ᵢ₌₁ᵀ, W_seasonal, S_site)</code></pre>
+<h3>6. Spatial Crop Features (CNN)</h3>
+<p><strong>Multi-Scale Pattern Recognition:</strong></p>
+<pre><code>F_crop = CNN_spatial(I_multispectral(x,y,λ), T_texture(x,y))</code></pre>
+<h3>7. Food Security State Transitions</h3>
+<p><strong>Probabilistic Classification:</strong></p>
+<pre><code>p(FS_state(t+Δt) | X(t)) = Softmax(f_NN(X_production, X_access, X_shock))</code></pre>
+<h3>8. Heterogeneous Data Fusion</h3>
+<p><strong>Multi-Modal Integration:</strong></p>
+<pre><code>F_fused = Concat(CNN(I_satellite), MLP(X_survey), NLP(T_reports))</code></pre>
+<h3>9. Transfer Learning for Food Security</h3>
+<p><strong>Domain Adaptation:</strong></p>
+<pre><code>L_transfer = L_task(y_target, ŷ_target) + λ·L_domain(X_source, X_target)</code></pre>
+<h3>10. Food Quality Assessment</h3>
+<p><strong>Computer Vision Model:</strong></p>
+<pre><code>Q_quality = f_CNN(I_visual(λ), F_texture, S_spectral, G_geometry)
+Hyperspectral Detection:
+C_contaminant(x,y) = Conv1D_λ(R(x,y,λ₁:λₙ)) → Dense(F_spectral)</code></pre>
+<h3>11. Disease Detection</h3>
+<p><strong>Deep Learning Classification:</strong></p>
+<pre><code>p(Disease | I) = Softmax(CNN_deep(I_leaf))
+Multi-Scale Features:
+F_multiscale = Concat(Conv₃ₓ₃(I), Conv₅ₓ₅(I), Conv₇ₓ₇(I))</code></pre>
+<h3>12. Precision Agriculture Optimization</h3>
+<p><strong>Spatial Input Optimization:</strong></p>
+<pre><code>I*(x) = argmax_I [Π(I,x) - C(I) - λ_E·E(I,x)]
+Within-Field Yield:
+Y(x,y) = f_spatial(S_soil(x,y), T_topography(x,y), H_historical(x,y), V_vegetation(x,y))</code></pre>
+<h3>13. Climate Adaptation Strategy</h3>
+<p><strong>Expected Value Optimization:</strong></p>
+<pre><code>M*_strategy = argmax_M E_climate[Y(M, C_future) - C(M) - λ_R·R(M, C_variability)]
+Variety Selection:
+V*(C_projected, S_site) = argmax_V f_ML(Y_V(C_projected), S_V(S_site), R_V)</code></pre>
+<h3>14. Supply Chain Optimization</h3>
+<p><strong>Multi-Objective Framework:</strong></p>
+<pre><code>min_x E[C_total(x) + λ_waste·W(x) + λ_quality·Q_loss(x)]
+Quality Degradation:
+Q(t) = Q₀·exp(-∫₀ᵗ k_decay(T(τ), H(τ)) dτ)</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray rasterio gdal scikit-learn tensorflow torch opencv-python pillow matplotlib seaborn</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-12-agriculture-food-security/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-12-agriculture-food-security/scripts
+python agriculture_framework.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_crop_growth_modeling.ipynb</h3>
+<ul>
+<li>Crop biomass dynamics</li>
+<li>Growth rate modeling</li>
+<li>Phenological stages</li>
+<li>Stress effects</li>
+</ul>
+<h3>02_yield_prediction_remote_sensing.ipynb</h3>
+<ul>
+<li>Random forest for yield forecasting</li>
+<li>Vegetation index time series</li>
+<li>Feature engineering</li>
+<li>Uncertainty quantification</li>
+</ul>
+<h3>03_food_security_monitoring.ipynb</h3>
+<ul>
+<li>Multi-dimensional food security</li>
+<li>State transition modeling</li>
+<li>Early warning indicators</li>
+<li>Vulnerability assessment</li>
+</ul>
+<h3>04_computer_vision_food_quality.ipynb</h3>
+<ul>
+<li>CNN for quality classification</li>
+<li>Defect detection</li>
+<li>Hyperspectral analysis</li>
+<li>Multi-modal fusion</li>
+</ul>
+<h3>05_precision_agriculture.ipynb</h3>
+<ul>
+<li>Variable rate mapping</li>
+<li>Within-field variability</li>
+<li>Prescription generation</li>
+<li>Input optimization</li>
+</ul>
+<h3>06_disease_pest_detection.ipynb</h3>
+<ul>
+<li>Transfer learning for disease ID</li>
+<li>Attention mechanisms</li>
+<li>Mobile deployment</li>
+<li>Real-time diagnosis</li>
+</ul>
+<h3>07_climate_adaptation_agriculture.ipynb</h3>
+<ul>
+<li>Variety selection under climate change</li>
+<li>Planting date optimization</li>
+<li>Irrigation scheduling RL</li>
+<li>Risk assessment</li>
+</ul>
+<h3>08_supply_chain_optimization.ipynb</h3>
+<ul>
+<li>Demand forecasting</li>
+<li>Inventory management</li>
+<li>Quality degradation models</li>
+<li>Logistics optimization</li>
+</ul>
+<h2>Applications</h2>
+<h3>Crop Production</h3>
+<ul>
+<li>Yield forecasting</li>
+<li>Growth monitoring</li>
+<li>Stress detection</li>
+<li>Harvest planning</li>
+</ul>
+<h3>Food Security</h3>
+<ul>
+<li>Early warning systems</li>
+<li>Vulnerability mapping</li>
+<li>Intervention targeting</li>
+<li>Policy planning</li>
+</ul>
+<h3>Quality Assurance</h3>
+<ul>
+<li>Non-destructive testing</li>
+<li>Defect detection</li>
+<li>Contamination screening</li>
+<li>Grading automation</li>
+</ul>
+<h3>Farm Management</h3>
+<ul>
+<li>Precision agriculture</li>
+<li>Disease diagnosis</li>
+<li>Input optimization</li>
+<li>Decision support</li>
+</ul>
+<h2>Performance Metrics</h2>
+<table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>RMSE</td>
+<td>√[(1/n)Σ(Y-Ŷ)²]</td>
+<td>Yield prediction</td>
+</tr>
+<tr>
+<td>MAPE</td>
+<td>(1/n)Σ|(Y-Ŷ)/Y|·100</td>
+<td>Relative error</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td>TP+TN/(TP+TN+FP+FN)</td>
+<td>Disease detection</td>
+</tr>
+<tr>
+<td>F1 Score</td>
+<td>2·(Prec·Rec)/(Prec+Rec)</td>
+<td>Imbalanced classes</td>
+</tr>
+</table>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
