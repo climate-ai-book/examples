@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Atmospheric Composition and Air Quality</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 6: Atmospheric Composition and Air Quality</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 6 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter develops comprehensive theoretical foundations for AI-enhanced atmospheric composition modeling, including:</p>
+<ul>
+<li>Mathematical foundations of atmospheric chemical transport</li>
+<li>Deep learning architectures for multi-species chemical modeling</li>
+<li>Physics-informed neural networks for chemical transport dynamics</li>
+<li>Advanced ensemble methods for chemical composition uncertainty</li>
+<li>Spectral analysis and multi-scale chemical transport modeling</li>
+<li>Advanced source apportionment and emission estimation</li>
+<li>Real-time air quality forecasting and operational deployment</li>
+<li>Advanced evaluation frameworks and performance metrics</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-06-atmospheric-composition/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_chemical_transport_equations.ipynb
+│   ├── 02_graph_neural_networks_chemistry.ipynb
+│   ├── 03_physics_informed_air_quality.ipynb
+│   ├── 04_ensemble_uncertainty_chemistry.ipynb
+│   ├── 05_multiscale_chemical_transport.ipynb
+│   ├── 06_source_apportionment_ml.ipynb
+│   └── 07_realtime_air_quality_forecasting.ipynb
+├── scripts/
+│   ├── atmospheric_composition_framework.py
+│   ├── chemical_transport_gnn.py
+│   ├── source_apportionment_vae.py
+│   └── realtime_aq_predictor.py
+└── data/
+    ├── air_quality_monitoring.csv
+    ├── emission_inventory.nc
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Chemical Transport Equations</h3>
+<p><strong>Advection-Diffusion-Reaction Equation:</strong></p>
+<pre><code>∂c_i/∂t + ∇·(uc_i) = ∇·(K∇c_i) + Σ_j k_j Π_k c_k^ν_kj - Σ_l k_l c_i Π_m c_m^ν_ml + E_i - D_i
+Where:
+
+c_i: concentration of species i
+u: wind velocity vector
+K: turbulent diffusivity tensor
+k_j, k_l: reaction rate constants
+ν: stoichiometric coefficients
+E_i: emission rates
+D_i: deposition rates</code></pre>
+
+<h3>2. Graph Neural Networks for Chemistry</h3>
+<p><strong>Chemistry-Aware Attention:</strong></p>
+<pre><code>Attention_chem(Q,K,V) = softmax(QK^T/√d_k ⊙ W_reaction + βT_transport)V
+Components:
+
+W_reaction: chemical reaction pathway weights
+T_transport: atmospheric transport connectivity
+β: balance parameter</code></pre>
+
+<p><strong>Message Passing for Chemical Species:</strong></p>
+<pre><code>m_ij = Message(h_i, h_j, e_ij^chem)
+h_i^(l+1) = Update(h_i^(l), Σ_{j∈N(i)} m_ij)</code></pre>
+<h3>3. Physics-Informed Loss Functions</h3>
+<p><strong>Comprehensive PINN Loss:</strong></p>
+<pre><code>L_PINN = L_data + λ_pde L_pde + λ_mass L_mass + λ_reaction L_reaction + λ_boundary L_boundary
+Constraints:
+
+L_pde: chemical transport PDE residual
+L_mass: elemental mass conservation
+L_reaction: temperature-dependent reaction rates
+L_boundary: emission/deposition boundaries</code></pre>
+
+<p><strong>Temperature-Dependent Reactions (Arrhenius):</strong></p>
+<pre><code>k(T) = A exp(-E_a/RT)</code></pre>
+<h3>4. Ensemble Methods for Uncertainty</h3>
+<p><strong>Ensemble Kalman Filter for Chemistry:</strong></p>
+<pre><code>x_a,i^chem = x_f,i^chem + K_chem(y_obs + ε_i - H_chem x_f,i^chem)
+Components:
+
+x_a: analysis ensemble members
+x_f: forecast ensemble members
+K_chem: Kalman gain for chemical observations
+H_chem: observation operator</code></pre>
+
+<p><strong>Bayesian Neural Networks:</strong></p>
+<pre><code>p(w|D) = p(D|w)p(w)/p(D)
+Predictions: μ ± σ from posterior samples</code></pre>
+<h3>5. Wavelet Analysis for Multi-Scale Transport</h3>
+<p><strong>Scale-Dependent Wavelet Transform:</strong></p>
+<pre><code>W_c(a,b) = (1/√a)∫ c(t)ψ*((t-b)/a) dt · ω_scale(a)
+Parameters:
+
+a: scale (different transport processes)
+b: temporal localization
+ψ: mother wavelet
+ω_scale: scale-dependent weighting</code></pre>
+
+<h3>6. Source Apportionment</h3>
+<p><strong>Variational Autoencoder for Sources:</strong></p>
+<pre><code>L_VAE-source = E_q[log p(x|z)] - KL[q(z|x)||p(z)]
+Where:
+
+x: observed concentrations
+z: latent source contributions
+q: encoder distribution
+p: decoder distribution</code></pre>
+
+<h3>7. Real-Time Processing</h3>
+<p><strong>Online Learning Update:</strong></p>
+<pre><code>θ_{t+1} = θ_t - η_t ∇L(θ_t; x_t, y_t) + λ_forgetting(θ_ref - θ_t)
+Components:
+
+η_t: adaptive learning rate
+λ_forgetting: prevents catastrophic forgetting
+θ_ref: reference parameters</code></pre>
+
+<h3>8. Evaluation Metrics</h3>
+<p><strong>Comprehensive Metric:</strong></p>
+<pre><code>M_comprehensive = α·RMSE + β·|MFB| + γ·UCS + δ·IOA
+Where:
+
+RMSE: root mean square error
+MFB: mean fractional bias
+UCS: uncertainty calibration score
+IOA: index of agreement</code></pre>
+
+<p><strong>Threshold Exceedance Metrics:</strong></p>
+<pre><code>POD = TP/(TP + FN)  # Probability of detection
+FAR = FP/(TP + FP)  # False alarm ratio
+CSI = TP/(TP + FP + FN)  # Critical success index</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 torch torch-geometric scikit-learn matplotlib seaborn</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-06-atmospheric-composition/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-06-atmospheric-composition/scripts
+python atmospheric_composition_framework.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_chemical_transport_equations.ipynb</h3>
+<ul>
+<li>Implement advection-diffusion-reaction equations</li>
+<li>Numerical methods for chemical transport</li>
+<li>Turbulent diffusivity parameterizations</li>
+<li>Emission and deposition modeling</li>
+</ul>
+<h3>02_graph_neural_networks_chemistry.ipynb</h3>
+<ul>
+<li>GNN architectures for chemical species</li>
+<li>Reaction network topology</li>
+<li>Chemistry-aware message passing</li>
+<li>Multi-species coupling</li>
+</ul>
+<h3>03_physics_informed_air_quality.ipynb</h3>
+<ul>
+<li>PINN implementation for chemical transport</li>
+<li>Mass conservation enforcement</li>
+<li>Temperature-dependent kinetics</li>
+<li>Photochemical process modeling</li>
+</ul>
+<h3>04_ensemble_uncertainty_chemistry.ipynb</h3>
+<ul>
+<li>Bayesian neural networks for chemistry</li>
+<li>Ensemble Kalman filtering</li>
+<li>Multi-model ensembles</li>
+<li>Uncertainty propagation</li>
+</ul>
+<h3>05_multiscale_chemical_transport.ipynb</h3>
+<ul>
+<li>Wavelet decomposition</li>
+<li>Multi-resolution processing</li>
+<li>Scale-dependent transport</li>
+<li>Cross-scale interactions</li>
+</ul>
+<h3>06_source_apportionment_ml.ipynb</h3>
+<ul>
+<li>Variational autoencoders for sources</li>
+<li>Neural receptor models</li>
+<li>Emission source identification</li>
+<li>Transport probability learning</li>
+</ul>
+<h3>07_realtime_air_quality_forecasting.ipynb</h3>
+<ul>
+<li>Streaming data processing</li>
+<li>Online learning algorithms</li>
+<li>Edge-cloud architectures</li>
+<li>Quality control systems</li>
+</ul>
+<h2>Applications</h2>
+<h3>Air Quality Forecasting</h3>
+<ul>
+<li>PM2.5 and PM10 predictions</li>
+<li>Ozone forecasting</li>
+<li>NO₂ and SO₂ modeling</li>
+<li>Multi-pollutant systems</li>
+</ul>
+<h3>Source Apportionment</h3>
+<ul>
+<li>Traffic contributions</li>
+<li>Industrial sources</li>
+<li>Biomass burning</li>
+<li>Secondary aerosol formation</li>
+</ul>
+<h3>Health Impact Assessment</h3>
+<ul>
+<li>Exposure modeling</li>
+<li>Health advisory systems</li>
+<li>Vulnerable population protection</li>
+<li>Regulatory compliance</li>
+</ul>
+<h2>Performance Metrics</h2>
+<table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>RMSE</td>
+<td>√[(1/n)Σ(y_i - ŷ_i)²]</td>
+<td>Overall accuracy</td>
+</tr>
+<tr>
+<td>MFB</td>
+<td>200·Σ(y-ŷ)/(y+ŷ)/n</td>
+<td>Fractional bias</td>
+</tr>
+<tr>
+<td>POD</td>
+<td>TP/(TP+FN)</td>
+<td>Exceedance detection</td>
+</tr>
+<tr>
+<td>CSI</td>
+<td>TP/(TP+FP+FN)</td>
+<td>Critical events</td>
+</tr>
+</table>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
