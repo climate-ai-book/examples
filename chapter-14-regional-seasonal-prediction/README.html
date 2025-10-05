@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 14: Regional and Seasonal Climate Prediction</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body><h1>Chapter 14: Regional and Seasonal Climate Prediction</h1><p>This folder contains code examples, notebooks, and datasets accompanying Chapter 14 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p><h2>Chapter Overview</h2><p>This chapter establishes comprehensive frameworks for AI-enhanced seasonal forecasting, including:</p><ul>
+<li>Mathematical foundations for seasonal prediction</li>
+<li>Sub-seasonal climate forecasting with deep learning</li>
+<li>Seasonal precipitation prediction</li>
+<li>Seasonal temperature forecasting</li>
+<li>Drought forecasting with machine learning</li>
+<li>Monsoon prediction and tropical climate</li>
+<li>Climate model downscaling and bias correction</li>
+<li>Hybrid dynamical-statistical prediction</li>
+<li>Multi-model ensemble and model selection</li>
+<li>Streamflow and hydrological forecasting</li>
+<li>Interpretability and physical consistency</li>
+</ul><h2>Contents</h2><pre><code>chapter-14-regional-seasonal-prediction/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_seasonal_prediction_fundamentals.ipynb
+│   ├── 02_lstm_subseasonal_forecasting.ipynb
+│   ├── 03_precipitation_prediction.ipynb
+│   ├── 04_temperature_forecasting.ipynb
+│   ├── 05_drought_forecasting.ipynb
+│   ├── 06_monsoon_prediction.ipynb
+│   ├── 07_downscaling_bias_correction.ipynb
+│   └── 08_multi_model_ensemble.ipynb
+├── scripts/
+│   ├── seasonal_prediction_framework.py
+│   ├── lstm_forecaster.py
+│   ├── ensemble_predictor.py
+│   └── downscaling_model.py
+└── data/
+    ├── climate_indices_time_series.csv
+    ├── seasonal_temperature_data.csv
+    └── README.md
+</code></pre><h2>Key Concepts and Mathematical Foundations</h2><h3>1. Seasonal Anomaly Decomposition</h3><p><strong>Forced + Internal Variability:</strong></p>
+<pre><code>X(t) = X_forced(t) + X_internal(t) = f(B(t)) + ε(t)Where:
+
+X_forced: predictable component from boundary conditions B
+X_internal: unpredictable atmospheric variability
+B: SST, soil moisture, snow cover</code></pre>
+<h3>2. ML Seasonal Prediction</h3><p><strong>Conditional Probability:</strong></p>
+<pre><code>p(X_{t+τ} | I_t, C_t) = f_ML(I_t, C_t; θ)Inputs:
+
+I_t: initial conditions (atmospheric state)
+C_t: slowly-evolving climate state, external forcings
+θ: learned parameters</code></pre>
+<h3>3. RNN for Climate Evolution</h3><p><strong>Temporal Dynamics:</strong></p>
+<pre><code>h_t = tanh(W_h·h_{t-1} + W_x·x_t + b_h)
+y_{t+τ} = W_y·h_t + b_yHidden state h_t encodes climate memory</code></pre><h3>4. Ensemble Seasonal Prediction</h3><p><strong>Adaptive Weighting:</strong></p>
+<pre><code>X̂_ensemble = Σᵢ wᵢ(τ, conditions)·X̂ᵢWeights vary with lead time and climate regime</code></pre><h3>5. LSTM for Sub-Seasonal Forecasting</h3><p><strong>Complete LSTM Cell:</strong></p>
+<pre><code>f_t = σ(W_f·[h_{t-1}, x_t] + b_f)  # Forget gate
+i_t = σ(W_i·[h_{t-1}, x_t] + b_i)  # Input gate
+C̃_t = tanh(W_C·[h_{t-1}, x_t] + b_C)
+C_t = f_t ⊙ C_{t-1} + i_t ⊙ C̃_t  # Cell state
+o_t = σ(W_o·[h_{t-1}, x_t] + b_o)  # Output gate
+h_t = o_t ⊙ tanh(C_t)</code></pre><h3>6. Hybrid Prediction</h3><p><strong>Dynamical + ML Correction:</strong></p>
+<pre><code>X̂_hybrid(t+τ) = X̂_dynamical(t+τ) + Δ_ML(X̂_dynamical, F_features, τ)</code></pre><h3>7. Attention Mechanisms</h3><p><strong>Predictor Importance:</strong></p>
+<pre><code>αₜ = exp(eₜ) / Σₜ' exp(eₜ')
+eₜ = v^T tanh(W·hₜ)Attention weights identify relevant time steps/locations</code></pre><h3>8. Probabilistic Precipitation</h3><p><strong>Category Classification:</strong></p>
+<pre><code>P(Precip > threshold | X_predictors) = f_classifier(X_predictors)Classes: above-normal, near-normal, below-normal</code></pre><h3>9. Multi-Model Ensemble</h3><p><strong>GCM Integration:</strong></p>
+<pre><code>P̂_MME = g_ML({P̂ᵢ^GCM}ᵢ, C_indices, O_obs)Combines multiple climate models with indices and observations</code></pre><h3>10. Climate Driver Integration</h3><p><strong>Regional Prediction:</strong></p>
+<pre><code>P̂_regional(r,t+τ) = h_ML(ENSO(t), IOD(t), SAM(t), SST_patterns(t), H_historical(r))Large-scale drivers:
+
+ENSO: El Niño-Southern Oscillation
+IOD: Indian Ocean Dipole
+SAM: Southern Annular Mode</code></pre>
+<h3>11. Temperature Downscaling</h3><p><strong>GCM to Field Scale:</strong></p>
+<pre><code>T_field(x,y,t+τ) = f_downscale(T_GCM(t+τ), E_elevation(x,y), L_landcover(x,y), T_local-obs)Growing Degree Days:
+GDD_forecast = Σₜ max(0, T_daily(t) - T_base)</code></pre><h3>12. Drought Index Forecasting</h3><p><strong>SPI Prediction:</strong></p>
+<pre><code>SPI(t+τ) = f_ML(P_historical(t), F_climate-forecast(t), V_vegetation(t), S_soil-moisture(t))Multi-category severity:
+P_drought-categories(t+τ) = Softmax(f_neural(X_predictors(t)))</code></pre><h3>13. Monsoon Prediction</h3><p><strong>Basin-Scale Rainfall:</strong></p>
+<pre><code>P_monsoon(basin, season) = g_ensemble(I_ENSO, I_IOD, S_SST, M_GCM, H_historical)</code></pre><h3>14. ML Downscaling</h3><p><strong>Coarse to Fine Scale:</strong></p>
+<pre><code>Y_local(x_fine, y_fine, t) = f_downscale(X_GCM(x_coarse, y_coarse, t), T_terrain, L_land, O_obs-hist)CNN Spatial Upscaling:
+Y_high-res = CNN_upscale(X_low-res, W_learned)</code></pre><h3>15. Bias Correction</h3><p><strong>Quantile Mapping + ML:</strong></p>
+<pre><code>X_corrected = F_obs^{-1}(F_model(X_model)) + Δ_ML(conditions)</code></pre><h3>16. Hybrid Framework</h3><p><strong>Lead-Time Dependent Weighting:</strong></p>
+<pre><code>X̂_hybrid = α(τ)·X̂_dynamical + (1-α(τ))·X̂_ML + β·Δ_correctionCollaborative Prediction:
+X̂_{t+τ}^collaborative = f_ML(X̂_{t+τ}^dynamical, E_ensemble-spread, S_skill-metrics, C_conditions)</code></pre><h3>17. Adaptive Ensemble Weighting</h3><p><strong>Skill-Based Combination:</strong></p>
+<pre><code>X̂_merged = Σₘ wₘ^ML(S_skill, C_conditions)·X̂ₘModel Selection:
+S_m(r,s,τ) = g_ML(Skill_historical(m,r,s,τ), C_current, M_model-characteristics)</code></pre><h3>18. Streamflow Forecasting</h3><p><strong>Multi-Input Framework:</strong></p>
+<pre><code>Q(t+τ) = f_ML({Q(t-k)}_k, W_weather(t), C_climate(t), S_snow(t), B_basin)Seasonal Water Supply:
+V_seasonal = ∫_{t_spring}^{t_fall} Q(t) dt = g_ML(SWE_peak, C_seasonal-forecast, P_historical)</code></pre><h3>19. SHAP for Interpretability</h3><p><strong>Feature Attribution:</strong></p>
+<pre><code>φⱼ(x) = Σ_{S⊆F\{j}} [|S|!(|F|-|S|-1)!]/|F|! · [f(S∪{j}) - f(S)]Quantifies predictor importance</code></pre><h3>20. Physics-Constrained Loss</h3><p><strong>Conservation Enforcement:</strong></p>
+<pre><code>L_total = L_prediction + λ_physics·L_physicsEnsures physical consistency (water/energy balance)</code></pre><h2>Running the Examples</h2><h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 scikit-learn tensorflow torch matplotlib seaborn shap</code></pre><h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-14-regional-seasonal-prediction/notebooks
+jupyter lab</code></pre><h3>Python Scripts</h3>
+<pre><code>cd chapter-14-regional-seasonal-prediction/scripts
+python seasonal_prediction_framework.py</code></pre><h2>Notebook Descriptions</h2><h3>01_seasonal_prediction_fundamentals.ipynb</h3>
+<ul>
+<li>Predictability sources</li>
+<li>Forced vs internal variability</li>
+<li>Climate indices (ENSO, MJO, NAO)</li>
+<li>Temporal autocorrelation</li>
+</ul><h3>02_lstm_subseasonal_forecasting.ipynb</h3>
+<ul>
+<li>LSTM architecture for S2S</li>
+<li>Multi-lead-time prediction</li>
+<li>Feature engineering</li>
+<li>Attention mechanisms</li>
+</ul><h3>03_precipitation_prediction.ipynb</h3>
+<ul>
+<li>Probabilistic forecasting</li>
+<li>Multi-model ensemble</li>
+<li>Climate driver integration</li>
+<li>Regional skill assessment</li>
+</ul><h3>04_temperature_forecasting.ipynb</h3>
+<ul>
+<li>Seasonal temperature prediction</li>
+<li>Downscaling techniques</li>
+<li>Growing degree days</li>
+<li>Extreme temperature frequency</li>
+</ul><h3>05_drought_forecasting.ipynb</h3>
+<ul>
+<li>SPI/SPEI prediction</li>
+<li>Remote sensing integration</li>
+<li>Transfer learning for ungauged regions</li>
+<li>Multi-category severity</li>
+</ul><h3>06_monsoon_prediction.ipynb</h3>
+<ul>
+<li>Monsoon rainfall forecasting</li>
+<li>Onset timing prediction</li>
+<li>Teleconnection analysis</li>
+<li>Skill comparison with GCMs</li>
+</ul><h3>07_downscaling_bias_correction.ipynb</h3>
+<ul>
+<li>CNN-based downscaling</li>
+<li>Quantile mapping</li>
+<li>Bias correction methods</li>
+<li>Validation strategies</li>
+</ul><h3>08_multi_model_ensemble.ipynb</h3>
+<ul>
+<li>Adaptive weighting schemes</li>
+<li>Model selection algorithms</li>
+<li>Super-ensemble methods</li>
+<li>Uncertainty quantification</li>
+</ul><h2>Applications</h2><h3>Agriculture</h3>
+<ul>
+<li>Crop planning</li>
+<li>Growing season forecasts</li>
+<li>Irrigation scheduling</li>
+<li>Pest/disease risk</li>
+</ul><h3>Water Resources</h3>
+<ul>
+<li>Reservoir management</li>
+<li>Drought preparedness</li>
+<li>Flood forecasting</li>
+<li>Water allocation</li>
+</ul><h3>Energy</h3>
+<ul>
+<li>Demand forecasting</li>
+<li>Renewable energy planning</li>
+<li>Hydropower optimization</li>
+<li>Temperature-driven load</li>
+</ul><h3>Public Health</h3>
+<ul>
+<li>Heat wave prediction</li>
+<li>Disease vector habitat</li>
+<li>Air quality forecasting</li>
+<li>Health preparedness</li>
+</ul><h2>Performance Metrics</h2><table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>Anomaly Correlation</td>
+<td>Corr(X_forecast, X_obs)</td>
+<td>Seasonal skill</td>
+</tr>
+<tr>
+<td>RPSS</td>
+<td>1 - RPS_fcst/RPS_clim</td>
+<td>Probabilistic</td>
+</tr>
+<tr>
+<td>ROC Area</td>
+<td>Area under ROC curve</td>
+<td>Category forecasts</td>
+</tr>
+<tr>
+<td>Brier Score</td>
+<td>(1/n)Σ(f-o)²</td>
+<td>Probability accuracy</td>
+</tr>
+</table><h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul><h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p><h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p><h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul><hr><p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p></body>
+</html>
