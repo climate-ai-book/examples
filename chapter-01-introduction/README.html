@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction to AI in Climate Science</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            margin-bottom: 16px;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h4 {
+            font-size: 1em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            margin: 0;
+            padding: 0.2em 0.4em;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+        }
+        pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+        }
+        ul, ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            margin-bottom: 0.25em;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Chapter 1: Introduction to AI in Climate Science</h1>
+<p>This folder contains code examples, notebooks, and datasets accompanying Chapter 1 of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction."</p>
+<h2>Chapter Overview</h2>
+<p>This chapter establishes theoretical and mathematical foundations for applying AI to climate science, including:</p>
+<ul>
+<li>Theoretical foundations and mathematical framework</li>
+<li>Information-theoretic perspective on climate data</li>
+<li>Advanced machine learning architectures for climate applications</li>
+<li>Physics-informed neural networks in climate modeling</li>
+<li>Scale-aware learning and multi-resolution analysis</li>
+<li>Transfer learning and domain adaptation</li>
+<li>Uncertainty quantification and ensemble methods</li>
+<li>Interpretability and explainable AI</li>
+<li>Challenges, limitations, and ethical considerations</li>
+<li>Future directions and emerging paradigms</li>
+</ul>
+<h2>Contents</h2>
+<pre><code>chapter-01-introduction/
+├── README.html (this file)
+├── notebooks/
+│   ├── 01_climate_system_dynamics.ipynb
+│   ├── 02_information_theory_climate.ipynb
+│   ├── 03_neural_network_architectures.ipynb
+│   ├── 04_physics_informed_learning.ipynb
+│   ├── 05_multiscale_analysis.ipynb
+│   ├── 06_transfer_learning_climate.ipynb
+│   └── 07_uncertainty_quantification.ipynb
+├── scripts/
+│   ├── climate_dynamics_modeling.py
+│   ├── information_metrics.py
+│   ├── pinn_basics.py
+│   └── interpretability_methods.py
+└── data/
+    ├── sample_climate_fields.nc
+    ├── global_temperature_data.csv
+    └── README.md
+</code></pre>
+<h2>Key Concepts and Mathematical Foundations</h2>
+<h3>1. Climate System Dynamics</h3>
+<p><strong>Navier-Stokes Equations:</strong></p>
+<pre><code>∂v/∂t + (v·∇)v = -(1/ρ)∇p + ν∇²v + f</code></pre>
+<p><strong>Continuity Equation:</strong></p>
+<pre><code>∂ρ/∂t + ∇·(ρv) = 0</code></pre>
+<p><strong>Thermodynamic Equation:</strong></p>
+<pre><code>∂T/∂t + v·∇T = (1/ρc_p)(Dp/Dt + Q)</code></pre>
+<h3>2. Information Theory for Climate</h3>
+<p><strong>Mutual Information:</strong></p>
+<pre><code>I(X;Y) = Σ_x Σ_y p(x,y)log(p(x,y)/(p(x)p(y)))</code></pre>
+<p><strong>Entropy:</strong></p>
+<pre><code>H(X) = -Σ p(x)log p(x)</code></pre>
+<p><strong>Conditional Entropy:</strong></p>
+<pre><code>H(X|Y) = H(X,Y) - H(Y)</code></pre>
+<p><strong>Cross-Entropy Loss:</strong></p>
+<pre><code>L_CE = -Σ_i y_i log(ŷ_i)</code></pre>
+<h3>3. Neural Network Architectures</h3>
+<p><strong>Convolution Operation:</strong></p>
+<pre><code>(f * g)[m,n] = Σ_i Σ_j f[i,j] · g[m-i,n-j]</code></pre>
+<p><strong>Translation Equivariance:</strong></p>
+<pre><code>Conv(T_τ(x)) = T_τ(Conv(x))</code></pre>
+<p><strong>LSTM Cell State Updates:</strong></p>
+<pre><code>f_t = σ(W_f·[h_{t-1}, x_t] + b_f)      # Forget gate
+i_t = σ(W_i·[h_{t-1}, x_t] + b_i)      # Input gate
+C̃_t = tanh(W_C·[h_{t-1}, x_t] + b_C)  # Candidate
+C_t = f_t * C_{t-1} + i_t * C̃_t       # Cell state</code></pre>
+<p><strong>Continuous-time LSTM analog:</strong></p>
+<pre><code>dC/dt = f(t)·(-C) + i(t)·C̃(t)</code></pre>
+<h3>4. Physics-Informed Neural Networks</h3>
+<p><strong>PINN Loss Function:</strong></p>
+<pre><code>L = L_data + λ_pde L_pde + λ_bc L_bc + λ_ic L_ic</code></pre>
+<p><strong>Mass Conservation:</strong></p>
+<pre><code>∂ρ/∂t + ∇·(ρv) = 0</code></pre>
+<p><strong>Energy Conservation:</strong></p>
+<pre><code>∂T/∂t + v·∇T = κ∇²T + S</code></pre>
+<p><strong>Additional Physical Constraints:</strong></p>
+<pre><code>Hydrostatic: ∂p/∂z = -ρg
+Ideal Gas: p = ρR_d T
+Geostrophic: fk×v_g = -(1/ρ)∇_h p</code></pre>
+<p><strong>Heat Equation Residual:</strong></p>
+<pre><code>R_heat = ∂u/∂t - α∇²u - f(x,t)</code></pre>
+<h3>5. Multi-Scale Analysis</h3>
+<p><strong>Wavelet Transform:</strong></p>
+<pre><code>W(a,b) = (1/√a)∫ f(t)ψ*((t-b)/a) dt</code></pre>
+<p><strong>Morlet Wavelet:</strong></p>
+<pre><code>ψ(t) = π^{-1/4} e^{iω_0 t} e^{-t²/2}</code></pre>
+<p><strong>Dilated Convolution:</strong></p>
+<pre><code>y[n] = Σ_k x[n - dk]·w[k]</code></pre>
+<p><strong>Power-Law Scaling:</strong></p>
+<pre><code>E(k) ∝ k^{-β}
+(β ≈ 5/3 for atmospheric turbulence)</code></pre>
+<p><strong>Feature Pyramid Network:</strong></p>
+<pre><code>P_l = F_l + Upsample(P_{l+1})</code></pre>
+<h3>6. Transfer Learning</h3>
+<p><strong>H-Divergence (Domain Discrepancy):</strong></p>
+<pre><code>d_H(S,T) = 2 sup_{h∈H} |Pr_S[h(x)=1] - Pr_T[h(x)=1]|</code></pre>
+<p><strong>Domain-Adversarial Training:</strong></p>
+<pre><code>L_total = L_task(D_s) - λL_domain</code></pre>
+<h3>7. Uncertainty Quantification</h3>
+<p><strong>Bayes' Theorem:</strong></p>
+<pre><code>p(w|D) = p(D|w)p(w)/p(D)</code></pre>
+<p><strong>KL Divergence:</strong></p>
+<pre><code>KL[q(w;θ)||p(w|D)] = ∫ q(w;θ)log(q(w;θ)/p(w|D)) dw</code></pre>
+<p><strong>Evidence Lower Bound (ELBO):</strong></p>
+<pre><code>ELBO = E_{q(w;θ)}[log p(D|w)] - KL[q(w;θ)||p(w)]</code></pre>
+<p><strong>Ensemble Methods:</strong></p>
+<pre><code>ȳ = (1/N)Σ_{i=1}^N y_i
+σ² = (1/N)Σ_{i=1}^N (y_i - ȳ)²</code></pre>
+<p><strong>Monte Carlo Dropout:</strong></p>
+<pre><code>μ̂ = (1/T)Σ_{t=1}^T f(x; w_t)
+σ̂² = (1/T)Σ_{t=1}^T f(x; w_t)² - μ̂²</code></pre>
+<h3>8. Interpretability Methods</h3>
+<p><strong>Gradient-Based Attribution:</strong></p>
+<pre><code>A_i = (∂y/∂x_i)·x_i</code></pre>
+<p><strong>Integrated Gradients:</strong></p>
+<pre><code>IG_i(x) = (x_i - x'_i)∫_{α=0}^1 (∂f(x'+α(x-x'))/∂x_i) dα</code></pre>
+<p><strong>Attention Weights:</strong></p>
+<pre><code>α_i = exp(e_i)/Σ_j exp(e_j)</code></pre>
+<p><strong>Self-Attention:</strong></p>
+<pre><code>Attention(Q,K,V) = softmax(QK^T/√d_k)V</code></pre>
+<h3>9. Performance Metrics</h3>
+<p><strong>Regression Metrics:</strong></p>
+<pre><code>MAE = (1/n)Σ|y_i - ŷ_i|
+RMSE = √[(1/n)Σ(y_i - ŷ_i)²]
+NSE = 1 - Σ(y_i - ŷ_i)²/Σ(y_i - ȳ)²</code></pre>
+<p><strong>Classification Metrics:</strong></p>
+<pre><code>F1 = 2·(Precision·Recall)/(Precision + Recall)
+AUC = ∫_0^1 TPR(FPR^{-1}(x)) dx</code></pre>
+<h3>10. Future Paradigms</h3>
+<p><strong>Foundation Model Loss:</strong></p>
+<pre><code>L_foundation = Σ_i λ_i L_i + L_physics + L_consistency</code></pre>
+<p><strong>Hybrid Physics-ML System:</strong></p>
+<pre><code>∂u/∂t = F_physics(u) + F_ML(u; θ)</code></pre>
+<h2>Running the Examples</h2>
+<h3>Prerequisites</h3>
+<pre><code>pip install numpy pandas scipy xarray netCDF4 scikit-learn tensorflow torch matplotlib seaborn pywavelets</code></pre>
+<h3>Jupyter Notebooks</h3>
+<pre><code>cd chapter-01-introduction/notebooks
+jupyter lab</code></pre>
+<h3>Python Scripts</h3>
+<pre><code>cd chapter-01-introduction/scripts
+python climate_dynamics_modeling.py</code></pre>
+<h2>Notebook Descriptions</h2>
+<h3>01_climate_system_dynamics.ipynb</h3>
+<ul>
+<li>Navier-Stokes equations implementation</li>
+<li>Continuity and thermodynamic equations</li>
+<li>Basic climate model simulations</li>
+<li>Visualization of atmospheric dynamics</li>
+</ul>
+<h3>02_information_theory_climate.ipynb</h3>
+<ul>
+<li>Calculate entropy and mutual information</li>
+<li>Information flow in climate systems</li>
+<li>Teleconnection analysis</li>
+<li>Predictability limits</li>
+</ul>
+<h3>03_neural_network_architectures.ipynb</h3>
+<ul>
+<li>CNN for spatial climate data</li>
+<li>LSTM for temporal sequences</li>
+<li>Translation equivariance demonstrations</li>
+<li>Multi-scale feature extraction</li>
+</ul>
+<h3>04_physics_informed_learning.ipynb</h3>
+<ul>
+<li>PINN implementation basics</li>
+<li>Conservation law enforcement</li>
+<li>Automatic differentiation for PDEs</li>
+<li>Hybrid model development</li>
+</ul>
+<h3>05_multiscale_analysis.ipynb</h3>
+<ul>
+<li>Wavelet decomposition</li>
+<li>Multi-resolution analysis</li>
+<li>Scale-aware CNN architectures</li>
+<li>Energy cascade visualization</li>
+</ul>
+<h3>06_transfer_learning_climate.ipynb</h3>
+<ul>
+<li>Domain adaptation techniques</li>
+<li>Pre-training and fine-tuning</li>
+<li>Cross-region knowledge transfer</li>
+<li>Downscaling applications</li>
+</ul>
+<h3>07_uncertainty_quantification.ipynb</h3>
+<ul>
+<li>Bayesian neural networks</li>
+<li>Monte Carlo dropout</li>
+<li>Ensemble methods</li>
+<li>Uncertainty decomposition</li>
+</ul>
+<h2>Key Topics Covered</h2>
+<h3>Theoretical Foundations</h3>
+<ul>
+<li>Climate system dynamics equations</li>
+<li>Information theory applications</li>
+<li>Statistical learning theory</li>
+<li>Chaos and predictability limits</li>
+</ul>
+<h3>Machine Learning Methods</h3>
+<ul>
+<li>Convolutional Neural Networks</li>
+<li>Recurrent Neural Networks (LSTM/GRU)</li>
+<li>Transformer architectures</li>
+<li>Physics-informed approaches</li>
+</ul>
+<h3>Advanced Techniques</h3>
+<ul>
+<li>Multi-scale analysis</li>
+<li>Transfer learning</li>
+<li>Uncertainty quantification</li>
+<li>Interpretability methods</li>
+</ul>
+<h3>Challenges and Ethics</h3>
+<ul>
+<li>Non-stationarity issues</li>
+<li>Extrapolation limitations</li>
+<li>Data quality and bias</li>
+<li>Computational carbon footprint</li>
+</ul>
+<h2>Performance Metrics</h2>
+<table>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Application</th>
+</tr>
+<tr>
+<td>MAE</td>
+<td>(1/n)Σ|y_i - ŷ_i|</td>
+<td>General regression</td>
+</tr>
+<tr>
+<td>RMSE</td>
+<td>√[(1/n)Σ(y_i - ŷ_i)²]</td>
+<td>Temperature, precipitation</td>
+</tr>
+<tr>
+<td>NSE</td>
+<td>1 - Σ(y_i - ŷ_i)²/Σ(y_i - ȳ)²</td>
+<td>Hydrological modeling</td>
+</tr>
+<tr>
+<td>F1-Score</td>
+<td>2·Precision·Recall/(Precision + Recall)</td>
+<td>Extreme event detection</td>
+</tr>
+</table>
+<h2>Further Reading</h2>
+<ul>
+<li>Full chapter text in the book</li>
+<li>Additional tutorials: <a href="https://climate-ai-book.readthedocs.io">https://climate-ai-book.readthedocs.io</a></li>
+<li>Discussion forum: <a href="https://github.com/climate-ai-book/examples/discussions">https://github.com/climate-ai-book/examples/discussions</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>Found an error or have an improvement? Please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>MIT License - See main repository LICENSE file</p>
+<h2>Contact</h2>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/climate-ai-book/examples/issues">https://github.com/climate-ai-book/examples/issues</a></li>
+<li>Email: <a href="mailto:contact@climate-ai-book.org">contact@climate-ai-book.org</a></li>
+</ul>
+<hr>
+<p><em>Part of "AI in Climate Science: Machine Learning for Environmental Modeling and Prediction"<br>
+by Gupta, Kanwer, and Ahmad (2025)</em></p>
+</body>
+</html>
