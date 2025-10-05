@@ -2,79 +2,66 @@ name: climate-ai
 channels:
   - conda-forge
   - defaults
+
 dependencies:
-# Python version
+  # Python version
+  - python=3.9
 
-python=3.9
+  # Core scientific computing
+  - numpy>=1.21
+  - pandas>=1.3
+  - scipy>=1.7
+  - matplotlib>=3.5
+  - seaborn>=0.11
 
-# Core scientific computing
+  # Machine learning
+  - scikit-learn>=1.0
+  - xgboost>=1.5
+  - lightgbm>=3.3
 
-numpy>=1.21
-pandas>=1.3
-scipy>=1.7
-matplotlib>=3.5
-seaborn>=0.11
+  # Deep learning
+  - tensorflow>=2.8
+  # Alternative: pytorch>=1.11 (uncomment if using PyTorch)
+  # - pytorch>=1.11
+  # - torchvision>=0.12
 
-# Machine learning
+  # Climate-specific libraries
+  - xarray>=0.20
+  - netcdf4>=1.5
+  - cftime>=1.5
+  - cf-units>=3.0
+  - cartopy>=0.20
 
-scikit-learn>=1.0
-xgboost>=1.5
-lightgbm>=3.3
+  # Geospatial and visualization
+  - geoviews>=1.9
+  - hvplot>=0.7
+  - plotly>=5.0
 
-# Deep learning
+  # Data processing
+  - h5py>=3.6
+  - zarr>=2.10
+  - dask>=2021.11
 
-tensorflow>=2.8
+  # Jupyter environment
+  - jupyterlab>=3.2
+  - ipywidgets>=7.6
+  - notebook>=6.4
 
-Alternative: pytorch>=1.11 (uncomment if using PyTorch)
-- pytorch>=1.11
-- torchvision>=0.12
-# Climate-specific libraries
+  # Statistical analysis
+  - statsmodels>=0.13
 
-xarray>=0.20
-netcdf4>=1.5
-cftime>=1.5
-cf-units>=3.0
-cartopy>=0.20
+  # Utilities
+  - tqdm>=4.62
+  - pyyaml>=6.0
+  - python-dotenv>=0.19
 
-# Geospatial and visualization
+  # Development tools
+  - pytest>=7.0
+  - pytest-cov>=3.0
+  - black
+  - flake8
 
-geoviews>=1.9
-hvplot>=0.7
-plotly>=5.0
-
-# Data processing
-
-h5py>=3.6
-zarr>=2.10
-dask>=2021.11
-
-# Jupyter environment
-
-jupyterlab>=3.2
-ipywidgets>=7.6
-notebook>=6.4
-
-# Statistical analysis
-
-statsmodels>=0.13
-
-# Utilities
-
-tqdm>=4.62
-pyyaml>=6.0
-python-dotenv>=0.19
-
-# Development tools
-
-pytest>=7.0
-pytest-cov>=3.0
-black
-flake8
-
-# Pip packages (if needed)
-
-pip
-pip:
-
-keras>=2.8.0
-
+  # Pip packages (if needed)
+  - pip
+  - pip:
+    - keras>=2.8.0
